@@ -7,6 +7,7 @@ import {
   withRouter,
 } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
+import Main from "./components/Main/Main";
 
 function App(props) {
   const [user, setUser] = useState([]);
@@ -17,8 +18,19 @@ function App(props) {
     }
   });
   return (
-    <div>
-      <Router>
+    <div> 
+      <Main/>
+    </div>
+  );
+}
+
+export default App;
+
+
+
+// zaids code 
+{
+  /* <Router>
         <Switch>
           <Route exact path="/">
             <Login user={user} />
@@ -28,9 +40,5 @@ function App(props) {
             <Dashboard user={user} />
           </Route>
         </Switch>
-      </Router>
-    </div>
-  );
+      </Router> */
 }
-
-export default App;
