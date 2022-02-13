@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
-import db from "../Firebase";
+import db from "../../Firebase";
 import {
   BrowserRouter as Router,
   Switch,

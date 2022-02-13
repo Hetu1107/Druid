@@ -6,8 +6,6 @@ import {
   withRouter,
 } from "react-router-dom";
 import './style/App.scss';
-import Login from "./components/Login";
-import Dashboard from "./components/Dashboard";
 import Main from "./components/Main/Main";
 function App(props) {
   const [user, setUser] = useState([]);
