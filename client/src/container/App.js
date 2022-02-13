@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import Login from "./components/Login";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   withRouter,
 } from "react-router-dom";
+import './style/App.scss';
+import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import Main from "./components/Main/Main";
-
 function App(props) {
   const [user, setUser] = useState([]);
   useEffect(() => {
@@ -18,7 +18,7 @@ function App(props) {
     }
   });
   return (
-    <div> 
+    <div className="main-app"> 
       <Main/>
     </div>
   );

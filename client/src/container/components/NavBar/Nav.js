@@ -1,9 +1,11 @@
-import React from 'react'
-
+import React from 'react';
+import '../../style/Nav.scss';
 function Nav() {
   return (
-    <div>Nav</div>
+    <div className='main-nav-bar'>
+      
+    </div>
   )
 }
 
-export default Nav
+export default Nav;
