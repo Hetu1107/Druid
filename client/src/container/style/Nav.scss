@@ -1,1 +1,101 @@
 @import "variable";
+.main-nav-bar {
+    position: fixed;
+    top: 1vh;
+    left: 0.5vw;
+    height: 98vh;
+    width: 70px;
+    background-color: $secondary-background;
+    box-shadow: $nav-shadow;
+    border-radius: 10px;
+    // overflow-x: hidden;
+    transition: all 300ms ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.nav-toggle {
+    width: 50px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    padding:5px 0;
+    background-color: $primary;
+    transition: all 300ms ease;
+    border-radius: 50%;
+    margin-top: 5px;
+    cursor: pointer;
+    img{
+        width: 38px;
+        height: 38px;
+        background-position: center;
+    }
+}
+.middle-nav {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.nav-element {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    transition: all 300ms ease;
+    .ele-logo {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+        transition: all 300ms ease;
+        margin: 20px 0;
+        &:last-child{
+            margin: 30px 0;
+        }
+        i {
+            font-size: 18px;
+            color: $secondary;
+            transition: all 300ms ease;
+        }
+        .tooltiptext {
+            opacity: 0;
+            width: fit-content;
+            padding: 5px;
+            background-color: $secondary;
+            color: $secondary-background;
+            text-align: center;
+            border-radius: 5px;
+            position: absolute;
+            z-index: 10000;
+            left: 95%;
+            transition: all 300ms ease;
+            font-size: 16px;
+            font-family: $Nunito;
+            font-weight: 200;
+        }
+        &:hover{
+            .tooltiptext{
+                opacity: 1;
+            }
+            i{
+                color: $primary;
+            }
+        }
+    }
+}
