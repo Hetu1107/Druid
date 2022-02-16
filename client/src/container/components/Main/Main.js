@@ -6,6 +6,7 @@ import {
   Route,
   withRouter,
 } from "react-router-dom";
+import Front from "../Home/Front";
 
 function Main() {
   return (
@@ -13,7 +14,9 @@ function Main() {
       <Nav />
       <Router>
         <Switch>
-          <Route exact path="/"></Route>
+          <Route exact path="/">
+            <Front/>
+          </Route>
         </Switch>
       </Router>
     </>

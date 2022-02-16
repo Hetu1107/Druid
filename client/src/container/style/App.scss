@@ -2,7 +2,7 @@
 body {
     background-color: $background;
     width: 100vw;
-    min-height: 100vh;
+    min-height: 200vh;
     max-height: 100%;
     margin: 0;
     padding: 0;
@@ -11,7 +11,7 @@ body {
     overflow-x: hidden;
     display: flex;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
     position: relative;
 }
 .main-app{

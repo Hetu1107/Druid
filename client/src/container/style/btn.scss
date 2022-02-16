@@ -1,0 +1,34 @@
+@import "variable";
+.btn{
+    width: 100px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding: 2px 1px;
+    margin: 0;
+    font-size: 14px;
+    font-family: $Poppins;
+    box-shadow: $btn-shadow;
+    background-color: $secondary-background;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    &.primary{
+        color: $primary;
+        &:hover{
+            background-color: $primary;
+            color: $secondary-background;
+            box-shadow: $btn-primary-hover;
+            transform: translateY(-7px);
+        }
+    }
+    &.secondary{
+        color: $secondary;
+        &:hover{
+            background-color: $secondary;
+            color: $secondary-background;
+            box-shadow: $btn-secondary-hover;
+            transform: translateY(-7px);
+        }
+    }
+}

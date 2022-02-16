@@ -1,0 +1,42 @@
+@import "variable";
+
+.ocen {
+    height: fit-content;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+.wave {
+    background: url('../images/wave/wave2.svg') repeat-x;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 200px;
+    background-position: bottom;
+    transform: scaleY(-1);
+}
+.wave:nth-of-type(2) {
+    bottom: 15px;
+    animation: wave 2s infinite;
+    opacity: 0.2;
+}
+@keyframes wave {
+    0% {
+      bottom: 0;
+    }
+    50%{
+        top: 30px;
+    }
+    100% {
+      bottom: 0;
+    }
+}
+@media only screen and (max-width: 800px){
+    .ocen{
+        .wave{
+            background-size: 700px;
+        }
+    }
+}
