@@ -2,6 +2,7 @@ import React from "react";
 import Wave from "../Wave/Wave";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import yoga from "../../images/lottie/Yoga.json";
+import Wave2 from "../Wave/Wave2";
 function Front() {
   return (
     <div className="main-front-page">

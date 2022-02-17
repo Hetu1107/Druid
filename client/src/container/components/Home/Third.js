@@ -1,7 +1,9 @@
 import React from 'react'
 import Wave from '../Wave/Wave';
+import epres from '../../images/Front/epres.png';
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import pres from '../../images/lottie/pres.json';
+import Wave2 from '../Wave/Wave2';
 function Third() {
   return (
     <div className="second-home">
@@ -23,6 +25,7 @@ function Third() {
             style={{ height: "90%", width: "90%" }}
           ></Player>
         </div>
+        <img className='front-img top' src={epres}/>
       </div>
       <Wave />
     </div>

@@ -1,7 +1,8 @@
 import React from 'react'
 import Wave2 from "../Wave/Wave2";
+import frontyoga from '../../images/Front/yoga.png';
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
-import task from '../../images/lottie/task.json'
+import task from '../../images/lottie/task.json';
 function Fourth() {
   return (
     <div className="second-home">
@@ -23,6 +24,7 @@ function Fourth() {
             style={{ height: "90%", width: "90%" }}
           ></Player>
         </div>
+        <img className='front-img rev' src={frontyoga}/>
       </div>
       <Wave2 />
     </div>
