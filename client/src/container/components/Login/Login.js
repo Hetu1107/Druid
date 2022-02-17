@@ -11,7 +11,8 @@ import {
 function Login(props) {
   useEffect(() => {
     if (props.user.length) {
-      props.history.push("/dashboard");
+      props.history.push("/");
+      // Hide the login button
     }
   });
 
