@@ -5,8 +5,9 @@ import {
   Route,
   withRouter,
 } from "react-router-dom";
-import './style/App.scss';
+import "./style/App.scss";
 import Main from "./components/Main/Main";
+import Nav from "./components/NavBar/Nav";
 function App(props) {
   const [user, setUser] = useState([]);
   useEffect(() => {
@@ -16,17 +17,21 @@ function App(props) {
     }
   });
   return (
-    <div className="main-app"> 
-      <Main/>
+    <div className="main-app">
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Main user={user} />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
 
 export default App;
 
-
-
-// zaids code 
+// zaids code
 {
   /* <Router>
         <Switch>

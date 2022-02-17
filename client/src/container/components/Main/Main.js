@@ -8,19 +8,13 @@ import {
 } from "react-router-dom";
 import Home from "../Home/Home";
 
-function Main() {
+function Main(props) {
   return (
     <>
-      <Nav />
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Home/>
-          </Route>
-        </Switch>
-      </Router>
+      <Nav user={props.user} />
+      <Home />
     </>
   );
 }
 
-export default Main;
+export default withRouter(Main);
