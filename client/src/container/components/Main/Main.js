@@ -6,7 +6,7 @@ import {
   Route,
   withRouter,
 } from "react-router-dom";
-import Front from "../Home/Front";
+import Home from "../Home/Home";
 
 function Main() {
   return (
@@ -15,7 +15,7 @@ function Main() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Front/>
+            <Home/>
           </Route>
         </Switch>
       </Router>
