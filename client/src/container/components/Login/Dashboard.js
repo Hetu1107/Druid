@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleLogout } from "react-google-login";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  withRouter,
+  useNavigate,
 } from "react-router-dom";
 
 function Dashboard(props) {
+  const navigate = useNavigate();
+  const [user, setUser] = useState(localStorage.getItem("user"));
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user]);
+
   const logout = () => {
     localStorage.removeItem("user");
     // Push to Login Page
@@ -25,4 +33,4 @@ function Dashboard(props) {
   );
 }
 
-export default withRouter(Dashboard);
+export default Dashboard;

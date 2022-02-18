@@ -5,13 +5,10 @@ import "../../style/Register.scss";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import login from "../../images/lottie/login.json";
 import yoga from "../../images/lottie/Yoga2.json";
-function Login(props) {
-  // useEffect(() => {
-  //   if (props.user.length) {
-  //     props.history.push("/");
-  //     // Hide the login button
-  //   }
-  // });
+import { useNavigate } from "react-router-dom";
+
+function Login() {
+  const navigate = useNavigate();
 
   const isRegistered = async (email) => {
     let flag = 0;
@@ -28,10 +25,10 @@ function Login(props) {
     }).then(() => {
       if (flag == 0) {
         // Push to registration page
-        props.history.push("/register");
+        navigate("/register");
       } else {
-        props.history.push("/dashboard");
-        // Push to Dashboard
+        navigate("/");
+        // Push to Home page
       }
     });
   };
@@ -43,14 +40,6 @@ function Login(props) {
     localStorage.setItem("user", token);
     isRegistered(profile.email);
   };
-  /* google login */
-  // <GoogleLogin
-  //   clientId="228410119116-q73i0va2bdvg2qnabb6msrm7d8tml87d.apps.googleusercontent.com"
-  //   buttonText="Login"
-  //   onSuccess={responseGoogle}
-  //   onFailure={responseGoogle}
-  //   cookiePolicy={"single_host_origin"}
-  // />
   return (
     <div className="main-login-page">
       <div className="login-box">
@@ -77,7 +66,7 @@ function Login(props) {
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
               cookiePolicy={"single_host_origin"}
-              className = "google-login"
+              className="google-login"
             />
             <h3>Join Us Today!</h3>
           </div>
