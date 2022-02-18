@@ -1,1 +1,95 @@
 @import "variable";
+
+.main-login-page{
+    width: 100vw;
+    min-height: 100vh;
+    max-height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../images/wave/wave3.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.login-box{
+    width: 50%;
+    height: 70vh;
+    background-color: $secondary-background;
+    box-shadow: $nav-shadow;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: row;
+    .left{
+        width: 60%;
+        height: 100%;
+    }
+    .right{
+        width: 40%;
+        height: 100%;
+        background-color: $background;
+        border-radius: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        h2{
+            font-size: 40px;
+            font-family: $Nunito;
+            font-weight: 800;
+            color: $primary;
+            margin: 0;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+        img{
+            width: 40%;
+            height: 40%;
+        }
+        .google{
+            width: 100%;
+            height: 30%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            h3{
+                color: $light;
+                font-size: 20px;
+                font-family: $Poppins;
+                font-weight: 500;
+                margin: 0;
+                padding: 0;
+                margin: 10px 0;
+            }
+            .google-login{
+                color: $secondary-background !important;
+                background-color: $secondary !important;
+                transition: all 200ms ease !important;
+                &:hover{
+                    opacity: 1 !important;
+                    box-shadow: $nav-shadow !important;
+                }
+                img{
+                    border-radius: 50% !important;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 900px){
+    .login-box{
+        flex-direction: column;
+        height: fit-content;
+        .left{
+            width: 100%;
+            height: fit-content;
+            padding: 10px 0;
+        }
+        .right{
+            width: 100%;
+            height: fit-content;
+            padding: 10px 0;
+        }
+    }
+}
