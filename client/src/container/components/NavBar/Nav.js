@@ -38,7 +38,7 @@ function Nav(props) {
   const [user, setUser] = useState(localStorage.getItem("user"));
   useEffect(() => {
     if (!user) {
-      props.history.push("/");
+      // props.history.push("/");
       // Hide the sign out button and show login button
     } else {
       // Continue wherever you have redirected to
