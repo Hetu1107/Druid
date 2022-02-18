@@ -12,6 +12,11 @@ const navItems = [
     link: "/login",
   },
   {
+    logo : "fas fa-user-circle",
+    name : "Profile",
+    link : "/user",
+  },
+  {
     logo: "fas fa-home",
     name: "Home",
     link: "/",
