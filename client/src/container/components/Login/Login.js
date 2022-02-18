@@ -68,7 +68,7 @@ function Login(props) {
             autoplay
             loop
             src={yoga}
-            style={{ height: "80%", width: "80%", marginTop: 0 }}
+            style={{ height: "90%", width: "90%", marginTop: 0 }}
           ></Player>
           <div className="google">
             <GoogleLogin
