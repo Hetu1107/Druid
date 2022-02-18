@@ -3,12 +3,6 @@ import { Player, Controls } from "@lottiefiles/react-lottie-player";
 // styles
 import "../../style/Home.scss";
 import "../../style/btn.scss";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  withRouter,
-} from "react-router-dom";
 
 // conponents
 import Front from "./Front";
@@ -26,4 +20,4 @@ function Home() {
   );
 }
 
-export default withRouter(Home);
+export default Home;

@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import db from "../../Firebase";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  withRouter,
-} from "react-router-dom";
 
 function Login(props) {
-  useEffect(() => {
-    if (props.user.length) {
-      props.history.push("/");
-      // Hide the login button
-    }
-  });
+  // useEffect(() => {
+  //   if (props.user.length) {
+  //     props.history.push("/");
+  //     // Hide the login button
+  //   }
+  // });
 
   const isRegistered = async (email) => {
     let flag = 0;
@@ -46,20 +40,19 @@ function Login(props) {
     localStorage.setItem("user", token);
     isRegistered(profile.email);
   };
-
+  /* google login */
+  // <GoogleLogin
+  //   clientId="228410119116-q73i0va2bdvg2qnabb6msrm7d8tml87d.apps.googleusercontent.com"
+  //   buttonText="Login"
+  //   onSuccess={responseGoogle}
+  //   onFailure={responseGoogle}
+  //   cookiePolicy={"single_host_origin"}
+  // />
   return (
     <div>
-      <div>
-        <GoogleLogin
-          clientId="228410119116-q73i0va2bdvg2qnabb6msrm7d8tml87d.apps.googleusercontent.com"
-          buttonText="Login"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={"single_host_origin"}
-        />
-      </div>
+      <h1>Hey</h1>
     </div>
   );
 }
 
-export default withRouter(Login);
+export default Login;

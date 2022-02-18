@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  withRouter,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./style/App.scss";
-import Main from "./components/Main/Main";
+
+
+// components 
 import Nav from "./components/NavBar/Nav";
+import Home from "./components/Home/Home";
+import Login from "./components/Login/Login";
+
+// main function 
 function App(props) {
   const [user, setUser] = useState([]);
   useEffect(() => {
@@ -17,15 +18,15 @@ function App(props) {
     }
   });
   return (
+    <Router>
     <div className="main-app">
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Main user={user} />
-          </Route>
-        </Switch>
-      </Router>
+      <Nav user={user}/>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<Login/>}/>
+      </Routes>
     </div>
+    </Router>
   );
 }
 

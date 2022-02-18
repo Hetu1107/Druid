@@ -4,32 +4,34 @@ import src from "../../images/Healer.png";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import db from "../../Firebase";
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  withRouter,
+  Link
 } from "react-router-dom";
 
 const navItems = [
   {
     logo: "fas fa-sign-in-alt",
     name: "Login",
+    link : "/login",
   },
   {
     logo: "fas fa-home",
     name: "Home",
+    link: "/",
   },
   {
     logo: "fas fa-tasks",
     name: "Tasks",
+    link : "/"
   },
   {
     logo: "fas fa-calendar-check",
     name: "Appointment",
+    link : "/"
   },
   {
     logo: "fas fa-sign-out-alt",
     name: "Sign-Out",
+    link : "/"
   },
 ];
 function Nav(props) {
@@ -87,32 +89,34 @@ function Nav(props) {
       <div className="nav-toggle" id="nav-toggle">
         <img src={src} />
       </div>
-      <GoogleLogin
+      {/* <GoogleLogin
         clientId="228410119116-q73i0va2bdvg2qnabb6msrm7d8tml87d.apps.googleusercontent.com"
         buttonText="Login"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
         cookiePolicy={"single_host_origin"}
-      />
+      /> */}
       <div className="middle-nav">
         <div className="nav-element">
           {navItems.map((res) => {
             return (
+              <Link to={res.link}>
               <div className="ele-logo">
                 <i className={res.logo}></i>
                 <span className="tooltiptext">{res.name}</span>
               </div>
+              </Link>
             );
           })}
         </div>
-        <GoogleLogout
+        {/* <GoogleLogout
           clientId="228410119116-q73i0va2bdvg2qnabb6msrm7d8tml87d.apps.googleusercontent.com"
           buttonText="Logout"
           onLogoutSuccess={logout}
-        ></GoogleLogout>
+        ></GoogleLogout> */}
       </div>
     </div>
   );
 }
 
-export default withRouter(Nav);
+export default Nav;
