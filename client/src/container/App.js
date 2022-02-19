@@ -8,6 +8,7 @@ import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Dashboard from "./components/Login/Dashboard";
 import User from "./components/user/User";
+import RegisterMain from "./components/Register/RegisterMain";
 
 // main function
 function App(props) {
@@ -27,6 +28,7 @@ function App(props) {
           <Route path="/login" element={<Login />} />
           <Route path="/tasks" element={<Dashboard />} />
           <Route path="/user" element={<User/>}/>
+          <Route path="/register" element={<RegisterMain/>}/>
         </Routes>
       </div>
     </Router>

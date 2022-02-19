@@ -77,6 +77,105 @@
         }
     }
 }
+.main-user-registration{
+    width: 100vw;
+    min-height: 100vh;
+    max-height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // background-image: url('../images/wave/wave3.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.registration-box{
+    width: 70%;
+    min-height: 70vh;
+    max-height: fit-content;
+    background-color: $secondary-background;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: $nav-shadow;
+    z-index: 100;
+    .detail{
+        width: 100%;
+        height: fit-content;
+        margin: 10px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .before-text-box{
+            width: 90%;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: $secondary-background;
+            box-shadow: $box-shadow;
+            border-radius: 10px;
+            margin-top: 10px;
+            padding: 10px 0;
+        }
+        .text{
+            width: 96%;
+            padding: 0 2%;
+        }
+    }
+}
+.heading{
+    width: 90%;
+    min-height: 50px;
+    max-height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 5px 0;
+    padding: 2px 0;
+    border-radius: 10px;
+    background-color: $secondary-background;
+    box-shadow: $box-shadow;
+    h1{
+        font-size: 20px;
+        margin: 0;
+        padding: 0;
+        font-family: $Poppins;
+        color: $text-heading;
+        margin: 3px;
+        font-weight: 400;
+    }
+    &.max{
+        justify-content: center;
+        background: $gradient;
+        padding: 5px 0;
+        h1{
+            font-size: 30px;
+            font-weight: 500;
+            color: $secondary-background;
+        }
+    }
+}
+.btn-area{
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 30px 0;
+    box-shadow: $box-shadow;
+    padding: 10px 0;
+    border-radius: 5px;
+    .btn{
+        margin-left: 10px;
+        box-shadow: $box-shadow;
+    }
+}
 @media only screen and (max-width: 900px){
     .login-box{
         flex-direction: column;
