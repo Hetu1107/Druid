@@ -8,7 +8,7 @@ import Person from "./Person";
 import '../../style/User.scss';
 import '../../style/textbox.scss';
 
-let about = 0;
+let about = 1;
 function User() {
   function checkUser(){
     if (about) {

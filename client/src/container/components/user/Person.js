@@ -222,7 +222,7 @@ function Person() {
                     type="text"
                     className="text-input"
                     onChange={(e) => {
-                      var a = [...user_Contact];
+                      var a = [...user_Medical];
                       var name = e.target.value;
                       a[index][0].value = e.target.value;
                       setUserMedical(() => a);
@@ -243,7 +243,7 @@ function Person() {
                     type="text"
                     className="text-input"
                     onChange={(e) => {
-                      var a = [...user_Contact];
+                      var a = [...user_Medical];
                       var name = e.target.value;
                       a[index][1].value = e.target.value;
                       setUserMedical(() => a);
