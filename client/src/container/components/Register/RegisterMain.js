@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import db from "../../Firebase";
 import "../../style/Register.scss";
 import "../../style/textbox.scss";
-import Wave from '../Wave/Wave2'
+import Wave from "../Wave/Wave2";
 let user_detail_get = [
   [
     {
@@ -47,11 +49,32 @@ let health_user_data = [
   ],
 ];
 function RegisterMain() {
+  const [email, setEmail] = useState(localStorage.getItem("email"));
   const [user_Get_Detail, setUserGetDetail] = useState(user_detail_get);
   const [user_Health_Detail, setUserHealthDetail] = useState(health_user_data);
+
+  const navigate = useNavigate();
+  const submit = () => {
+    db.collection("users")
+      .add({
+        email,
+        name: user_detail_get[0][0].value,
+        number: user_detail_get[0][1].value,
+        age: user_detail_get[1][0].value,
+        blood: user_detail_get[1][1].value,
+        disease: user_Health_Detail[0][0].value,
+        alergies: user_Health_Detail[0][1].value,
+        weight: user_Health_Detail[1][0].value,
+        height: user_Health_Detail[1][1].value,
+      })
+      .then(() => {
+        navigate("/");
+      });
+  };
+
   return (
     <div className="main-user-registration">
-      <Wave/>
+      <Wave />
       <div className="registration-box">
         <div className="heading max">
           <h1>Last Step Before You Get Started</h1>
@@ -134,7 +157,9 @@ function RegisterMain() {
         </div>
         {/* btn area started  */}
         <div className="btn-area">
-          <button className="btn primary">Submit</button>
+          <button onClick={submit} className="btn primary">
+            Submit
+          </button>
         </div>
       </div>
     </div>
