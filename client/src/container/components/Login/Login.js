@@ -38,6 +38,7 @@ function Login() {
     const token = response.tokenId;
     console.log(profile);
     localStorage.setItem("user", token);
+    localStorage.setItem("email", profile.email);
     isRegistered(profile.email);
   };
   return (

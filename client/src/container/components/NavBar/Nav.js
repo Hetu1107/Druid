@@ -12,9 +12,9 @@ const navItems = [
     link: "/login",
   },
   {
-    logo : "fas fa-user-circle",
-    name : "Profile",
-    link : "/user",
+    logo: "fas fa-user-circle",
+    name: "Profile",
+    link: "/user",
   },
   {
     logo: "fas fa-home",
@@ -40,6 +40,7 @@ const navItems = [
 function Nav(props) {
   const logout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("email");
     // Push to Home Page
   };
 
