@@ -13,8 +13,8 @@ let user_detail = [
   ],
   [
     {
-      label: "Email",
-      value: "hetu200@gmail.com",
+      label: "Blood Group",
+      value: "B+",
     },
     {
       label: "M-Number",
@@ -37,12 +37,22 @@ let contact = [
 let medical = [
   [
     {
-      label: "Blood Group",
-      value: "B+",
-    },
-    {
       label: "Height (ft)",
       value: "5.6",
+    },
+    {
+      label: "Weigth",
+      value: "50",
+    },
+  ],
+  [
+    {
+      label: "Disease",
+      value: "",
+    },
+    {
+      label: "Alergies",
+      value: "",
     },
   ],
 ];

@@ -25,6 +25,16 @@ let user_detail_get = [
       value: "",
     },
   ],
+  [
+    {
+      label: "City",
+      value: "",
+    },
+    {
+      label: "Pincode",
+      value: "",
+    },
+  ],
 ];
 let health_user_data = [
   [
@@ -75,7 +85,7 @@ function RegisterMain() {
   return (
     <div className="main-user-registration">
       <Wave />
-      <div className="registration-box">
+      <form className="registration-box">
         <div className="heading max">
           <h1>Last Step Before You Get Started</h1>
         </div>
@@ -161,7 +171,7 @@ function RegisterMain() {
             Submit
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
