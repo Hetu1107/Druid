@@ -9,10 +9,12 @@ import Login from "./components/Login/Login";
 import Dashboard from "./components/Login/Dashboard";
 import User from "./components/user/User";
 import RegisterMain from "./components/Register/RegisterMain";
+import Load from "./components/Loader/Load";
 
 // main function
 function App(props) {
   const [user, setUser] = useState([]);
+  const [Loadind,setLoad] = useState(0);
   useEffect(() => {
     if (localStorage.getItem("user")) {
       setUser(localStorage.getItem("user"));
@@ -23,8 +25,9 @@ function App(props) {
     <Router>
       <div className="main-app">
         <Nav user={user} />
+        <Load load={Loadind}/>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/tasks" element={<Dashboard />} />
           <Route path="/user" element={<User/>}/>

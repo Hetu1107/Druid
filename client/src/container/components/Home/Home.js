@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 // styles
 import "../../style/Home.scss";
@@ -9,7 +9,7 @@ import Front from "./Front";
 import Second from "./Second";
 import Third from "./Third";
 import Fourth from "./Fourth";
-function Home() {
+function Home(props) {
   return (
     <div className="home">
       <Front />
