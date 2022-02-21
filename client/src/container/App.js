@@ -39,18 +39,3 @@ function App(props) {
 }
 
 export default App;
-
-// zaids code
-{
-  /* <Router>
-        <Switch>
-          <Route exact path="/">
-            <Login user={user} />
-          </Route>
-          <Route exact path="/register"></Route>
-          <Route exact path="/dashboard">
-            <Dashboard user={user} />
-          </Route>
-        </Switch>
-      </Router> */
-}

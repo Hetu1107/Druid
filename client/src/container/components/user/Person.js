@@ -1,94 +1,135 @@
 import React, { useEffect, useState } from "react";
+import db from "../../Firebase";
 
-let user_detail = [
-  [
-    {
-      label: "Name",
-      value: "Hetu Patel",
-    },
-    {
-      label: "Age",
-      value: "19",
-    },
-  ],
-  [
-    {
-      label: "Blood Group",
-      value: "B+",
-    },
-    {
-      label: "M-Number",
-      value: "9978452565",
-    },
-  ],
-];
-let contact = [
-  [
-    {
-      label: "City",
-      value: "Vadodara",
-    },
-    {
-      label: "Pincode",
-      value: "390025",
-    },
-  ],
-];
-let medical = [
-  [
-    {
-      label: "Height (ft)",
-      value: "5.6",
-    },
-    {
-      label: "Weigth",
-      value: "50",
-    },
-  ],
-  [
-    {
-      label: "Disease",
-      value: "",
-    },
-    {
-      label: "Alergies",
-      value: "",
-    },
-  ],
-];
 function Person() {
   const [editMode, setMode] = useState(false);
-  const [user_Data, setUserData] = useState(user_detail);
-  const [user_Contact, setUserContact] = useState(contact);
-  const [user_Medical, setUserMedical] = useState(medical);
+  const [user_Data, setUserData] = useState([]);
+  const [user_Contact, setUserContact] = useState([]);
+  const [user_Medical, setUserMedical] = useState([]);
+  let user_detail = [
+    [
+      {
+        label: "Name",
+        value: "Hetu Patel",
+      },
+      {
+        label: "Age",
+        value: "19",
+      },
+    ],
+    [
+      {
+        label: "Blood Group",
+        value: "B+",
+      },
+      {
+        label: "M-Number",
+        value: "9978452565",
+      },
+    ],
+  ];
+  let contact = [
+    [
+      {
+        label: "City",
+        value: "Vadodara",
+      },
+      {
+        label: "Pincode",
+        value: "390025",
+      },
+    ],
+  ];
+  let medical = [
+    [
+      {
+        label: "Height (ft)",
+        value: "5.6",
+      },
+      {
+        label: "Weigth",
+        value: "50",
+      },
+    ],
+    [
+      {
+        label: "Disease",
+        value: "",
+      },
+      {
+        label: "Alergies",
+        value: "",
+      },
+    ],
+  ];
+
+  const [final, setFinal] = useState([]);
+  useEffect(() => {
+    db.collection("users").onSnapshot((snap) => {
+      snap.docs.map((doc) => {
+        const email = localStorage.getItem("email");
+        if (doc.data().email === email) {
+          db.collection("users")
+            .doc(doc.id)
+            .onSnapshot((snap) => {
+              setFinal(snap.data());
+            });
+        }
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log(final);
+    user_detail[0][0].value = final.name;
+    user_detail[0][1].value = final.age;
+    user_detail[1][0].value = final.blood;
+    user_detail[1][1].value = final.number;
+    medical[0][0].value = final.height;
+    medical[0][1].value = final.weight;
+    medical[1][0].value = final.disease;
+    medical[1][1].value = final.alergies;
+    setUserData(user_detail);
+    setUserMedical(medical);
+    setUserContact(contact);
+  }, [final]);
+  const [image, setImage] = useState(localStorage.getItem("image"));
+  useEffect(() => {
+    console.log(image);
+  }, [image]);
   return (
     <div className="profile-data">
       <div className="left">
-          <div className="top">
-              <img src="https://bestprofilepictures.com/wp-content/uploads/2021/04/Cool-Profile-Picture.jpg"/>
-              <div className="points">
-                <div>
-                    <h2>300</h2>
-                    <h4>Points</h4>
-                </div>
-                <div>
-                    <h2>12</h2>
-                    <h4>Tasks</h4>
-                </div>
-              </div>
-              <div className="activity">
-                    <h2>Your Activity</h2>
-                    <div className="activities">
-                        <h4>Nothing is here...</h4>
-                    </div>
-              </div>
-              <div className="today-task">
-                    <h2>Todays Task</h2>
-                    <div className="t-task">
-                        <h4>Yoga Strech</h4>
-                    </div>
-              </div>
+        <div className="top">
+          <img
+            src={
+              image ||
+              "https://bestprofilepictures.com/wp-content/uploads/2021/04/Cool-Profile-Picture.jpg"
+            }
+          />
+          <div className="points">
+            <div>
+              <h2>300</h2>
+              <h4>Points</h4>
+            </div>
+            <div>
+              <h2>12</h2>
+              <h4>Tasks</h4>
+            </div>
           </div>
+          <div className="activity">
+            <h2>Your Activity</h2>
+            <div className="activities">
+              <h4>Nothing is here...</h4>
+            </div>
+          </div>
+          <div className="today-task">
+            <h2>Todays Task</h2>
+            <div className="t-task">
+              <h4>Yoga Strech</h4>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="right">
         <div className="top">

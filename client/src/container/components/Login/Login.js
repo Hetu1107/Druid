@@ -39,6 +39,7 @@ function Login() {
     console.log(profile);
     localStorage.setItem("user", token);
     localStorage.setItem("email", profile.email);
+    localStorage.setItem("image", profile.imageUrl);
     isRegistered(profile.email);
   };
   return (
