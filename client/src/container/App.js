@@ -10,6 +10,7 @@ import Dashboard from "./components/Login/Dashboard";
 import User from "./components/user/User";
 import RegisterMain from "./components/Register/RegisterMain";
 import Load from "./components/Loader/Load";
+import MainAppointment from "./components/Appointment/MainAppointment";
 
 // main function
 function App(props) {
@@ -31,6 +32,7 @@ function App(props) {
           <Route path="/login" element={<Login />} />
           <Route path="/tasks" element={<Dashboard />} />
           <Route path="/user" element={<User/>}/>
+          <Route path="/appointment" element={<MainAppointment/>}/>
           <Route path="/register" element={<RegisterMain/>}/>
         </Routes>
       </div>

@@ -29,7 +29,7 @@ const navItems = [
   {
     logo: "fas fa-calendar-check",
     name: "Appointment",
-    link: "/",
+    link: "/appointment",
   },
   {
     logo: "fas fa-sign-out-alt",

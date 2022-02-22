@@ -1,0 +1,241 @@
+@import "variable";
+
+
+.main-appointment{
+    width: 100vw;
+    min-height: 100vh;
+    max-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.appointment-box{
+    width: calc(100vw);
+    min-height: 100vh;
+    max-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.book-appointment{
+    width: 90%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .top{
+        width: 88%;
+        height: fit-content;
+        padding: 2px 1%;
+        background-color: $dark-pink;
+        border-radius: 20px;
+        margin: 10px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        h1{
+            margin: 0;
+            padding: 0;
+            color: $secondary-background;
+            font-family: $Poppins;
+            font-weight: 500;
+            font-size: 24px;
+        }
+    }
+}
+.list-of-doc{
+    width: 60%;
+    min-height: 70vh;
+    max-height: fit-content;
+    border-radius: 20px;
+    background-color: $secondary-background;
+    margin: 5px 10px;
+    box-shadow: $box-shadow;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    .top{
+        background-color: $secondary;
+    }
+}
+.deatil-of-doc{
+    width: 35%;
+    min-height: 70vh;
+    max-height: fit-content;
+    border-radius: 20px;
+    background-color: $secondary-background;
+    margin: 5px 10px;
+    box-shadow: $box-shadow;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    .top{
+        background-color: $primary;
+    }
+    .detail-box{
+        width: 90%;
+        min-height: 50vh;
+        max-height: fit-content;
+        box-shadow: $box-shadow;
+        margin-top: 5px;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        h3{
+            font-size: 18px;
+            font-family: $Nunito;
+            color: $text;
+            font-weight: 400;
+            margin: 0;
+            padding: 0;
+        }
+        .det-box{
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 5px 0;
+            align-items: flex-start;
+            h2{
+                margin: 0;
+                padding: 0;
+                font-size: 20px;
+                font-family: $Nunito;
+                font-weight: 400;
+                margin-left: 20px;
+                margin-right: 5px;
+                color: $text;
+                span{
+                    color: $text-heading;
+                }
+            }
+            &.but{
+                align-items: flex-end;
+                .btn{
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}
+.search-bar{
+    width: 90%;
+    height: fit-content;
+    padding: 5px 0;
+    margin: 5px 0;
+    background-color: transparent;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input{
+        width: 100%;
+        padding: 5px 10px;
+        font-size: 16px;
+        font-family: $Nunito;
+        border-radius: 20px;
+        border: none;
+        background-color: $secondary-background;
+        color: $text;
+        outline: none;
+        box-shadow: $box-shadow;
+    }
+}
+.search-results{
+    width: 90%;
+    height: 300px;
+    margin: 5px 0;
+    border-radius: 20px;
+    background-color: transparent;
+    box-shadow: $box-shadow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    .item{
+        width: 90%;
+        background-color: $secondary-background;
+        height: fit-content;
+        display: flex;
+        flex-direction: row;
+        padding: 5px 0;
+        margin: 4px 0;
+        cursor: pointer;
+        transition: all 200ms ease;
+        border-radius: 20px;
+        .left{
+            width: 70%;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            text-overflow: ellipsis;
+            h2{
+                margin: 0;
+                padding: 0;
+                color: $text;
+                margin: 0 5px;
+                font-family: $Nunito;
+                font-weight: 400;
+                font-size: 20px;
+                transition: all 200ms ease;
+            }
+        }
+        .right{
+            width: 30%;
+            height: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            i{
+                font-size: 20px;
+                color: $text;
+                margin-right: 10px;
+                transition: all 200ms ease;
+            }
+        }
+        &:nth-child(1){
+            margin-top: 10px;
+        }
+        &:hover{
+            box-shadow: $box-shadow;
+            .left{
+                h2{
+                    color: $primary;
+                }
+            }
+            .right{
+                i{
+                    color: $primary;
+                    margin-right: 8px;
+                }
+            }
+        }
+        &.selected{
+            box-shadow: $box-shadow;
+            .left{
+                h2{
+                    color: $primary;
+                }
+            }
+            .right{
+                i{
+                    color: $primary;
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+}
