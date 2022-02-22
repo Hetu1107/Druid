@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import "../../style/Load.scss";
 function Load(props) {
   const [showLoader, setShowLoader] = useState(props.load);
+  useState(()=>{
+    setShowLoader(props.load);
+  })
   const display = () => {
     if (showLoader==1) {
       return (

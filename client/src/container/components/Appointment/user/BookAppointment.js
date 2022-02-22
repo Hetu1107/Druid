@@ -9,11 +9,14 @@ function BookAppointment(props) {
   const [email, setEmail] = useState(localStorage.getItem("email"));
   const navigate = useNavigate();
   useEffect(() => {
-    db.collection("doctors").onSnapshot((snap) => {
-      setDoctors(snap.docs.map((doc) => doc.data()));
-    });
-    // console.log(doctors);
-  });
+    props.setLoad(1);
+    db.collection("doctors").onSnapshot(
+     (snap) => {
+        setDoctors(snap.docs.map((doc) => doc.data()));
+        props.setLoad(0);
+      }
+    );
+  },[]);
 
   const Payment = () => {
     if (PaymentDone == 1) {
@@ -86,12 +89,16 @@ function BookAppointment(props) {
   };
   return (
     <div className="book-appointment">
-      <div className="list-of-doc">
+      <div className="list">
         <div className="top">
           <h1>List Of Doctors</h1>
         </div>
         <div className="search-bar">
-          <input className="search" type="search" placeholder="search here..."/>
+          <input
+            className="search"
+            type="search"
+            placeholder="search here..."
+          />
         </div>
         <div className="search-results">
           {doctors.map((res, index) => {

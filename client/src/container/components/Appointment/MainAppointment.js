@@ -9,7 +9,7 @@ import "../../style/Appointment.scss";
 import "../../style/List.scss";
 import { useNavigate } from "react-router-dom";
 
-function MainAppointment() {
+function MainAppointment(props) {
   const navigate = useNavigate();
   const [user, setUser] = useState(localStorage.getItem("user"));
   useEffect(() => {
@@ -23,7 +23,7 @@ function MainAppointment() {
     if (a) {
       return <DoctorAppointment />;
     } else {
-      return <UserAppointment />;
+      return <UserAppointment setLoad={props.setLoad}/>;
     }
   };
   return <div className="main-appointment">{check()}</div>;
