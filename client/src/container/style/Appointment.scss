@@ -62,54 +62,6 @@
     .top{
         background-color: $primary;
     }
-    .detail-box{
-        width: 90%;
-        min-height: 50vh;
-        max-height: fit-content;
-        box-shadow: $box-shadow;
-        margin-top: 5px;
-        border-radius: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        h3{
-            font-size: 18px;
-            font-family: $Nunito;
-            color: $text;
-            font-weight: 400;
-            margin: 0;
-            padding: 0;
-        }
-        .det-box{
-            width: 100%;
-            height: fit-content;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin: 5px 0;
-            align-items: flex-start;
-            h2{
-                margin: 0;
-                padding: 0;
-                font-size: 20px;
-                font-family: $Nunito;
-                font-weight: 400;
-                margin-left: 20px;
-                margin-right: 5px;
-                color: $text;
-                span{
-                    color: $text-heading;
-                }
-            }
-            &.but{
-                align-items: flex-end;
-                .btn{
-                    margin-right: 10px;
-                }
-            }
-        }
-    }
 }
 
 .booked-appointment-box{
@@ -178,4 +130,51 @@
             }
         }
     }
+}
+.change-token{
+    width: 87%;
+    border-radius: 20px;
+    padding: 10px 0;
+    margin: 10px 0;
+    height: fit-content;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $secondary-background;
+    box-shadow: $box-shadow;
+    h2{
+        font-size: 20px;
+        font-family: $Nunito;
+        color: $text;
+        margin: 0;
+        padding: 0;
+        margin: 0 10px;
+        span{
+            color: $text-heading;
+        }
+    }
+    .btn{
+        margin: 0 10px;
+    }
+}
+
+@media only screen and (max-width: 1200px){
+    .book-appointment{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .deatil-of-doc{
+            width: calc(100% - 100px);
+            margin-top: 10px;
+        }
+        .list{
+            width: calc(100% - 100px);
+            margin-top: 10px;
+        }
+    }
+    .change-token{
+        width: calc(90% - 100px);
+    }
+
 }

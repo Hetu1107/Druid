@@ -18,7 +18,7 @@ function MainAppointment(props) {
     }
   }, [user]);
   
-  const a = 0;
+  const a = 1;
   const check = () => {
     if (a) {
       return <DoctorAppointment />;
