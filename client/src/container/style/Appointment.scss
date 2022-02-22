@@ -239,3 +239,70 @@
         }
     }
 }
+.booked-appointment-box{
+    width: 50%;
+    min-height: 60vh;
+    max-height: fit-content;
+    background-color: $secondary-background;
+    box-shadow: $box-shadow;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .top{
+        width: 90%;
+        height: fit-content;
+        padding: 5px 0;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $secondary;
+        margin: 5px 0;
+        h1{
+            font-family: $Nunito;
+            font-weight: 400;
+            font-size: 20px;
+            margin: 0;
+            padding: 0;
+            color: $secondary-background;
+        }
+    }
+    .book-details{
+        width: 90%;
+        height: fit-content;
+        box-shadow: $box-shadow;
+        border-radius: 20px;
+        padding: 5px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 5px 0;
+        div{
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 0;
+            margin: 3px 0;
+            h3,h1,h4{
+                font-size: 18px;
+                font-family: $Poppins;
+                color: $text;
+                margin: 0;
+                padding: 0;
+                margin-left: 10px;
+                margin-right: 10px;
+                span{
+                    color: $text-heading;
+                }
+            }
+            h1{
+                color: $text-heading;
+                color: $secondary;
+                font-weight: 300;
+            }
+        }
+    }
+}

@@ -91,7 +91,7 @@ function BookAppointment(props) {
           <h1>List Of Doctors</h1>
         </div>
         <div className="search-bar">
-          <input className="search" type="search" />
+          <input className="search" type="search" placeholder="search here..."/>
         </div>
         <div className="search-results">
           {docotors.map((res, index) => {
