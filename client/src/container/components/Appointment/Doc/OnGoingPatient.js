@@ -1,5 +1,12 @@
 import React from 'react'
-
+import Popup from '../../Popup/Popup';
+const onGoingDetail = {
+  name : "Hetu Patel",
+  age : "19",
+  height : '6',
+  blood : "B+",
+  disease : "Nothing",
+}
 function OnGoingPatient() {
     const checkUsers = ()=>{
         if(0){
@@ -15,22 +22,26 @@ function OnGoingPatient() {
               <div className="det-box">
                 <h2>
                   <span>Name : </span>
-                  Patient Name
+                  {onGoingDetail.name}
                 </h2>
               </div>
               <div className="det-box">
                 <h2>
                   <span>Age : </span>
-                  19
+                  {onGoingDetail.age}
                 </h2>
               </div>
               <div className="det-box">
                 <h2>
                   <span>Weigth : </span>
-                  40
+                  {onGoingDetail.height}
                 </h2>
               </div>
               <div className="det-box but">
+                <button className='btn primary' onClick={()=>{
+                  document.getElementById('popup-main').style.opacity = "1";
+                  document.getElementById('popup-main').style.zIndex = "10000";
+                }}>Profile</button>
                 <button className="btn secondary">
                   Prescription
                 </button>
@@ -41,6 +52,7 @@ function OnGoingPatient() {
       }
   return (
     <div className="deatil-of-doc">
+          <Popup onGoing={onGoingDetail}/>
           <div className="top">
             <h1>Detail</h1>
           </div>

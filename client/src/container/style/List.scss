@@ -169,7 +169,11 @@
             }
         }
         &.but{
-            align-items: flex-end;
+            margin-top: 20px;
+            align-items: center;
+            justify-content: flex-end;
+            flex-direction: row;
+            flex-wrap: wrap;
             .btn{
                 margin-right: 10px;
             }

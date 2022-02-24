@@ -3,12 +3,12 @@
     position: fixed;
     top: 1vh;
     left: 0.5vw;
-    height: 98vh;
+    min-height: 98vh;
+    max-height: fit-content;
     width: 70px;
     background-color: $secondary-background;
     box-shadow: $nav-shadow;
     border-radius: 10px;
-    // overflow-x: hidden;
     transition: all 300ms ease;
     display: flex;
     flex-direction: column;
