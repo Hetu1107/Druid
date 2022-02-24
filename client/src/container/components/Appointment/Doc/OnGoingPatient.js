@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import Popup from "../../Popup/Popup";
+
 import db from "../../../Firebase";
 
-function OnGoingPatient(props) {
+function OnGoingPatient() {
   const [email, setEmail] = useState(localStorage.getItem("email"));
   const [patient, setPatient] = useState([]);
-
   useEffect(() => {
     db.collection("doctors").onSnapshot((snap) => {
       snap.docs.map((doc) => {
@@ -21,7 +22,6 @@ function OnGoingPatient(props) {
       });
     });
   });
-
   const checkUsers = () => {
     if (0) {
       return (
@@ -47,10 +47,19 @@ function OnGoingPatient(props) {
           <div className="det-box">
             <h2>
               <span>Weigth : </span>
-              {patient.weight}
+              {patient.height}
             </h2>
           </div>
           <div className="det-box but">
+            <button
+              className="btn primary"
+              onClick={() => {
+                document.getElementById("popup-main").style.opacity = "1";
+                document.getElementById("popup-main").style.zIndex = "10000";
+              }}
+            >
+              Profile
+            </button>
             <button className="btn secondary">Prescription</button>
           </div>
         </div>
@@ -59,6 +68,7 @@ function OnGoingPatient(props) {
   };
   return (
     <div className="deatil-of-doc">
+      <Popup onGoing={patient} />
       <div className="top">
         <h1>Detail</h1>
       </div>
