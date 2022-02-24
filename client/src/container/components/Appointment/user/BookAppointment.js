@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import db from "../../../Firebase";
+import firebase from "firebase"
 
 let PaymentDone = 1;
 function BookAppointment(props) {
   const [doctors, setDoctors] = useState([]);
   const [selectedDoc, setSelectedDoc] = useState(-1);
   const [email, setEmail] = useState(localStorage.getItem("email"));
+  const [name, setName] = useState(localStorage.getItem("name"));
   const navigate = useNavigate();
   useEffect(() => {
     props.setLoad(1);
-    db.collection("doctors").onSnapshot(
-     (snap) => {
-        setDoctors(snap.docs.map((doc) => doc.data()));
-        props.setLoad(0);
-      }
-    );
-  },[]);
+    db.collection("doctors").onSnapshot((snap) => {
+      setDoctors(snap.docs.map((doc) => doc.data()));
+      props.setLoad(0);
+    });
+  }, []);
 
   const Payment = () => {
     if (PaymentDone == 1) {
@@ -41,6 +41,8 @@ function BookAppointment(props) {
               .collection("appointments")
               .add({
                 patient: email,
+                name:name,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
               })
               .then(() => {
                 navigate("/");
