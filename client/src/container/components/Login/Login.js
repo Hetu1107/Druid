@@ -16,11 +16,21 @@ function Login() {
       db.collection("users").onSnapshot((snap) => {
         snap.docs.map((doc) => {
           if (doc.data().email === email) {
+            localStorage.setItem("type", "patient");
             resolve(true);
             flag = 1;
           }
         });
-        resolve(true);
+        db.collection("doctors").onSnapshot((snap) => {
+          snap.docs.map((doc) => {
+            if (doc.data().email === email) {
+              localStorage.setItem("type", "doctor");
+              resolve(true);
+              flag = 1;
+            }
+          });
+        });
+        // resolve(true);
       });
     }).then(() => {
       if (flag == 0) {
@@ -40,6 +50,7 @@ function Login() {
     localStorage.setItem("user", token);
     localStorage.setItem("email", profile.email);
     localStorage.setItem("image", profile.imageUrl);
+    localStorage.setItem("name", profile.name);
     isRegistered(profile.email);
   };
   return (

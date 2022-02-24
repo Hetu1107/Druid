@@ -12,18 +12,24 @@ import { useNavigate } from "react-router-dom";
 function MainAppointment(props) {
   const navigate = useNavigate();
   const [user, setUser] = useState(localStorage.getItem("user"));
+  const [a, setA] = useState(0);
+
+  useEffect(() => {
+    if (localStorage.getItem("type") === "doctor") {
+      setA(1);
+    }
+  }, []);
   useEffect(() => {
     if (!user) {
       navigate("/login");
     }
   }, [user]);
-  
-  const a = 1;
+
   const check = () => {
     if (a) {
       return <DoctorAppointment />;
     } else {
-      return <UserAppointment setLoad={props.setLoad}/>;
+      return <UserAppointment setLoad={props.setLoad} />;
     }
   };
   return <div className="main-appointment">{check()}</div>;
