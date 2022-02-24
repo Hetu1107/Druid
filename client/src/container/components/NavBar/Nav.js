@@ -32,6 +32,11 @@ const navItems = [
     link: "/appointment",
   },
   {
+    logo : "fas fa-history",
+    name : "History",
+    link : "/history"
+  },
+  {
     logo: "fas fa-sign-out-alt",
     name: "Sign-Out",
     link: "/",

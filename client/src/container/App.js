@@ -10,6 +10,7 @@ import Dashboard from "./components/Login/Dashboard";
 import User from "./components/user/User";
 import RegisterMain from "./components/Register/RegisterMain";
 import MainAppointment from "./components/Appointment/MainAppointment";
+import History from "./components/History/History";
 
 // main function
 function App(props) {
@@ -61,6 +62,7 @@ function App(props) {
             element={<MainAppointment setLoad={setLoad} />}
           />
           <Route path="/register" element={<RegisterMain />} />
+          <Route path="/history" element={<History/>}/>
         </Routes>
       </div>
     </Router>
