@@ -6,7 +6,7 @@ import UserHistory from './UserHistory'
 import '../../style/History.scss'
 function History() {
     const check = () =>{
-        if(1){
+        if(0){
            return <DocHistory/>
         }
         else{
