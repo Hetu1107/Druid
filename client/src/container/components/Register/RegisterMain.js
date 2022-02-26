@@ -85,7 +85,7 @@ function RegisterMain() {
   return (
     <div className="main-user-registration">
       <Wave />
-      <form className="registration-box">
+      <div className="registration-box">
         <div className="heading max">
           <h1>Last Step Before You Get Started</h1>
         </div>
@@ -171,7 +171,7 @@ function RegisterMain() {
             Submit
           </button>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

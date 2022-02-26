@@ -36,6 +36,7 @@ function Login() {
       if (flag == 0) {
         // Push to registration page
         navigate("/register");
+        localStorage.setItem("type","patient")
       } else {
         navigate("/");
         // Push to Home page
