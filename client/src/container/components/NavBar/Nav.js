@@ -46,6 +46,8 @@ function Nav(props) {
   const logout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("email");
+    localStorage.removeItem("name");
+    localStorage.removeItem("type")
     // Push to Home Page
   };
 
