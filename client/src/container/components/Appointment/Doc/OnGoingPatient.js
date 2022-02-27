@@ -4,7 +4,7 @@ import Popup from "../../Popup/Popup";
 import db from "../../../Firebase";
 import Priscription from "./Priscription";
 
-function OnGoingPatient() {
+function OnGoingPatient(props) {
   const [email, setEmail] = useState(localStorage.getItem("email"));
   const [patient, setPatient] = useState([]);
   useEffect(() => {
@@ -61,10 +61,17 @@ function OnGoingPatient() {
             >
               Profile
             </button>
-            <button className="btn secondary" onClick={()=>{
-              document.getElementById('main-prescription').style.opacity = "1";
-              document.getElementById('main-prescription').style.zIndex = "1000";
-            }}>Prescription</button>
+            <button
+              className="btn secondary"
+              onClick={() => {
+                document.getElementById("main-prescription").style.opacity =
+                  "1";
+                document.getElementById("main-prescription").style.zIndex =
+                  "1000";
+              }}
+            >
+              Prescription
+            </button>
           </div>
         </div>
       );
@@ -72,7 +79,16 @@ function OnGoingPatient() {
   };
   return (
     <div className="deatil-of-doc">
-      <Priscription/>
+      <Priscription
+        detail={{
+          docname: "Doctor Name",
+          patientName: patient.name,
+          mobile: 99783431459,
+          age: patient.age,
+          precription: [],
+        }}
+         setLoad = {props.setLoad}
+      />
       <Popup onGoing={patient} />
       <div className="top">
         <h1>Detail</h1>

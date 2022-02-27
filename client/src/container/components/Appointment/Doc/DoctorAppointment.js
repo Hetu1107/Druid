@@ -3,7 +3,7 @@ import db from "../../../Firebase";
 import ListOfBooked from "./ListOfBooked";
 import OnGoingPatient from "./OnGoingPatient";
 
-function DoctorAppointment() {
+function DoctorAppointment(props) {
   const [token, setToken] = useState(0);
   const [email, setEmail] = useState(localStorage.getItem("email"));
   const [current, setCurrent] = useState("");
@@ -21,7 +21,7 @@ function DoctorAppointment() {
   return (
     <div className="appointment-box doctor">
       <div className="book-appointment">
-        <OnGoingPatient />
+        <OnGoingPatient setLoad={props.setLoad}/>
         <ListOfBooked />
       </div>
       <div className="change-token">

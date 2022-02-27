@@ -27,7 +27,7 @@ function MainAppointment(props) {
 
   const check = () => {
     if (a) {
-      return <DoctorAppointment />;
+      return <DoctorAppointment setLoad={props.setLoad}/>;
     } else {
       return <UserAppointment setLoad={props.setLoad} />;
     }

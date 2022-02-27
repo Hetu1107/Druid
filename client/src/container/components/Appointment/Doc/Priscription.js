@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "../../../style/Priscription.scss";
-function Priscription() {
+import { saveAs } from "file-saver";
+
+function Priscription(props) {
+  let detail = props.detail;
   const [priscription, setPriscription] = useState([]);
   const [input, setInput] = useState("");
   return (
@@ -16,6 +20,7 @@ function Priscription() {
             console.log(priscription);
             if (input.trim() != "") {
               setPriscription([...priscription, input]);
+              setInput("");
             }
           }}
         >
@@ -61,7 +66,30 @@ function Priscription() {
           >
             Cancel
           </button>
-          <button className="btn primary">Submit</button>
+          <button
+            className="btn primary"
+            onClick={async () => {
+              detail.precription = priscription;
+              console.log(detail);
+              props.setLoad(1);
+              await axios.post("/generate-pdf", detail).then(async () => {
+                await axios
+                  .get("/get-pdf", { responseType: "blob" })
+                  .then((res) => {
+                    const newPdf = new Blob([res.data], {
+                      type: "application/pdf",
+                    });
+                    // saveAs(newPdf,'newPdf.pdf');
+                    const fileURL = URL.createObjectURL(newPdf);
+                    const pdfWindow = window.open();
+                    pdfWindow.location.href = fileURL;
+                  });
+              });
+              props.setLoad(0);
+            }}
+          >
+            Submit
+          </button>
         </div>
       </div>
     </div>

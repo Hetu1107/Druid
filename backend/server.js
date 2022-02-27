@@ -12,7 +12,7 @@ app.use(express.json());
 
 // pst req for pdf gen 
 app.post('/generate-pdf',(req,res)=>{
-  res.send (pdf.create(pdfTemplate(req.body),{}).toFile('Prescription.pdf',(e)=>{
+  res.send(pdf.create(pdfTemplate(req.body),{}).toFile('Prescription.pdf',(e)=>{
     console.log(req.body);
     if(e){
       return Promise.reject();
