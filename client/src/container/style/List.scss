@@ -147,36 +147,36 @@
         margin: 0;
         padding: 0;
     }
-    .det-box{
-        width: 100%;
-        height: fit-content;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin: 5px 0;
-        align-items: flex-start;
-        h2{
-            margin: 0;
-            padding: 0;
-            font-size: 20px;
-            font-family: $Nunito;
-            font-weight: 400;
-            margin-left: 20px;
-            margin-right: 5px;
-            color: $text;
-            span{
-                color: $text-heading;
-            }
+}
+.det-box{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5px 0;
+    align-items: flex-start;
+    h2{
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        font-family: $Nunito;
+        font-weight: 400;
+        margin-left: 20px;
+        margin-right: 5px;
+        color: $text;
+        span{
+            color: $text-heading;
         }
-        &.but{
-            margin-top: 20px;
-            align-items: center;
-            justify-content: flex-end;
-            flex-direction: row;
-            flex-wrap: wrap;
-            .btn{
-                margin-right: 10px;
-            }
+    }
+    &.but{
+        margin-top: 20px;
+        align-items: center;
+        justify-content: flex-end;
+        flex-direction: row;
+        flex-wrap: wrap;
+        .btn{
+            margin-right: 10px;
         }
     }
 }

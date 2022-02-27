@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Popup from "../../Popup/Popup";
 
 import db from "../../../Firebase";
+import Priscription from "./Priscription";
 
 function OnGoingPatient() {
   const [email, setEmail] = useState(localStorage.getItem("email"));
@@ -60,7 +61,10 @@ function OnGoingPatient() {
             >
               Profile
             </button>
-            <button className="btn secondary">Prescription</button>
+            <button className="btn secondary" onClick={()=>{
+              document.getElementById('main-prescription').style.opacity = "1";
+              document.getElementById('main-prescription').style.zIndex = "1000";
+            }}>Prescription</button>
           </div>
         </div>
       );
@@ -68,6 +72,7 @@ function OnGoingPatient() {
   };
   return (
     <div className="deatil-of-doc">
+      <Priscription/>
       <Popup onGoing={patient} />
       <div className="top">
         <h1>Detail</h1>
