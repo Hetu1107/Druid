@@ -1,9 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../../style/Priscription.scss";
 import { saveAs } from "file-saver";
+import firebase from "firebase";
+import { storage } from "../../../Firebase";
 
 function Priscription(props) {
+  const [url,setUrl]=useState("")
+  useEffect(()=>{
+    console.log(url)
+  },[url])
+  const uploadToStorage = (imageURL) =>{
+    const storageRef = firebase.storage().ref('prescription.pdf');
+    getFileBlob(imageURL, blob =>{
+      console.log(blob)
+       storageRef.put(blob).on(
+        "state_changed",
+        (snap) => {
+          let percentage = (snap.bytesTransferred / snap.totalBytes) * 100;
+          // setProgress(percentage);
+        },
+        (err) => {
+          console.log(err)
+        },
+        async () => {
+          const url = await storageRef.getDownloadURL();
+          setUrl(url);
+        }
+      );
+   })
+}
+  var getFileBlob = function (url, cb) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.responseType = "blob";
+    xhr.addEventListener('load', function() {
+      cb(xhr.response);
+    });
+    xhr.send();
+  };
+  const getPdf = async () => {
+    await axios.get("/get-pdf", { responseType: "blob" }).then((res) => {
+      const newPdf = new Blob([res.data], {
+        type: "application/pdf",
+      });
+      // saveAs(newPdf,'newPdf.pdf');
+      const fileURL = URL.createObjectURL(newPdf);
+      uploadToStorage(fileURL)
+      const pdfWindow = window.open();
+      pdfWindow.location.href = fileURL;
+    });
+  };
   let detail = props.detail;
   const [priscription, setPriscription] = useState([]);
   const [input, setInput] = useState("");
@@ -73,22 +120,15 @@ function Priscription(props) {
               console.log(detail);
               props.setLoad(1);
               await axios.post("/generate-pdf", detail).then(async () => {
-                await axios
-                  .get("/get-pdf", { responseType: "blob" })
-                  .then((res) => {
-                    const newPdf = new Blob([res.data], {
-                      type: "application/pdf",
-                    });
-                    // saveAs(newPdf,'newPdf.pdf');
-                    const fileURL = URL.createObjectURL(newPdf);
-                    const pdfWindow = window.open();
-                    pdfWindow.location.href = fileURL;
-                  });
+                window.alert("Pdf updated");
               });
               props.setLoad(0);
             }}
           >
             Submit
+          </button>
+          <button className="btn primary" onClick={getPdf}>
+            Show PDF
           </button>
         </div>
       </div>
