@@ -11,6 +11,7 @@ import User from "./components/user/User";
 import RegisterMain from "./components/Register/RegisterMain";
 import MainAppointment from "./components/Appointment/MainAppointment";
 import History from "./components/History/History";
+import Task from "./components/Tasks/Task";
 
 // main function
 function App(props) {
@@ -55,7 +56,7 @@ function App(props) {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/tasks" element={<Dashboard />} />
+          <Route path="/tasks" element={<Task/>} />
           <Route path="/user" element={<User />} />
           <Route
             path="/appointment"
