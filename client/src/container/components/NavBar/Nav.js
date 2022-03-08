@@ -53,6 +53,22 @@ function Nav(props) {
 
   return (
     <div className="main-nav-bar" id="main-nav-bar">
+      <div className="bar" id="bar" onClick={()=>{
+        let check = document.getElementById('bar').classList.contains('cross');
+        console.log(check);
+        if(check){
+          document.getElementById('bar').classList.remove('cross');
+          document.getElementById('main-nav-bar').style.left = "-100px";
+        }
+        else{
+          document.getElementById('bar').classList.add('cross');
+          document.getElementById('main-nav-bar').style.left = "0.5vw";
+        }
+      }}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
       <div className="nav-toggle" id="nav-toggle">
         <img src={src} />
       </div>

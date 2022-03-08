@@ -165,16 +165,15 @@
         justify-content: center;
         align-items: center;
         .deatil-of-doc{
-            width: calc(100% - 100px);
+            width: calc(100%);
             margin-top: 10px;
         }
         .list{
-            width: calc(100% - 100px);
+            width: calc(100%);
             margin-top: 10px;
         }
     }
     .change-token{
-        width: calc(90% - 100px);
+        width: calc(90%);
     }
-
 }
