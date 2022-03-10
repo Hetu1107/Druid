@@ -68,11 +68,13 @@ function Priscription(props) {
             if (input.trim() != "") {
               setPriscription([...priscription, input]);
               setInput("");
+              document.getElementById('input-prescription').value = "";
             }
           }}
         >
           <input
             type="text"
+            id="input-prescription"
             placeholder="type here..."
             onChange={(e) => {
               setInput(e.target.value);
@@ -93,7 +95,7 @@ function Priscription(props) {
                   <i
                     class="fas fa-minus-circle"
                     onClick={() => {
-                      let arr = priscription;
+                      let arr = [...priscription];
                       arr.splice(index, 1);
                       setPriscription(arr);
                     }}
@@ -107,6 +109,9 @@ function Priscription(props) {
           <button
             className="btn secondary"
             onClick={() => {
+              setUrl("");
+              setPriscription([]);
+              setInput("");
               document.getElementById("main-prescription").style.opacity = "0";
               document.getElementById("main-prescription").style.zIndex = "-1";
             }}
@@ -115,19 +120,21 @@ function Priscription(props) {
           </button>
           <button
             className="btn primary"
+            id="submit-pdf"
             onClick={async () => {
               detail.precription = priscription;
               console.log(detail);
               props.setLoad(1);
               await axios.post("/generate-pdf", detail).then(async () => {
-                window.alert("Pdf updated");
+                  document.getElementById('submit-pdf').style.display = "none";
+                  document.getElementById('show-pdf').style.display = "flex";
               });
               props.setLoad(0);
             }}
           >
             Submit
           </button>
-          <button className="btn primary" onClick={getPdf}>
+          <button id="show-pdf" className="btn primary" onClick={getPdf}>
             Show PDF
           </button>
         </div>

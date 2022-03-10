@@ -5,7 +5,7 @@
     max-height: fit-content;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 .main-change{
@@ -16,7 +16,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     border-radius: 10px;
-    margin: 10px 0;
+    margin: 20px 0;
     background-color: $secondary-background;
     box-shadow: $box-shadow;
     div{
@@ -52,6 +52,14 @@
     }
 }
 .main-leader-board{
+    width: 100%;
+    min-height: 50vh;
+    max-height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.todays-task{
     width: 100%;
     min-height: 50vh;
     max-height: fit-content;

@@ -97,3 +97,13 @@
         width: 90%;
     }
 }
+#show-pdf{
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+@media only screen and (max-width: 900px){
+    .priscription-box{
+        width: 90%;
+    }
+}

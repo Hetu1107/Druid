@@ -16,15 +16,17 @@ let a = [];
 function Board() {
   // sorting data with scores
   const sort_data = () => {
-    let i = 0;
-    let n = score_data.length;
-    while (n-- > 0) {
-      if (score_data[i].score > 0) {
-        a.push(score_data[i]);
+    if(a.length==0){
+      let i = 0;
+      let n = score_data.length;
+      while (n-- > 0) {
+        if (score_data[i].score > 0) {
+          a.push(score_data[i]);
+        }
+        i++;
       }
-      i++;
+      a.sort((x, y) => (x.score > y.score ? 1 : -1));
     }
-    a.sort((x, y) => (x.score > y.score ? 1 : -1));
   };
   useEffect(() => {
     sort_data();
@@ -32,6 +34,7 @@ function Board() {
   //   assign value to the data
   const [sorted, setSorted] = useState(a);
   const empty_or_not = () => {
+    sort_data();
     if (sorted.length == 0) {
       return (
         <div className="empty">
