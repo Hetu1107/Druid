@@ -32,9 +32,9 @@ const navItems = [
     link: "/appointment",
   },
   {
-    logo : "fas fa-history",
-    name : "History",
-    link : "/history"
+    logo: "fas fa-history",
+    name: "History",
+    link: "/history",
   },
   // {
   //   logo: "fas fa-sign-out-alt",
@@ -43,54 +43,62 @@ const navItems = [
   // },
 ];
 function Nav(props) {
-  const logout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("email");
-    localStorage.removeItem("name");
-    localStorage.removeItem("type")
-    // Push to Home Page
-  };
-  const [email,setEmail] = useState(localStorage.getItem("email"));
-  const [navBar,setNavBar] = useState([]);
-  useEffect(()=>{
+  const [email, setEmail] = useState(localStorage.getItem("email"));
+  const [navBar, setNavBar] = useState([]);
+  useEffect(() => {
+    settingNav();
+  }, []);
+  const settingNav = () => {
     const logout = {
       logo: "fas fa-sign-out-alt",
       name: "Sign-Out",
       link: "/",
-    }
+    };
     const login = {
       logo: "fas fa-sign-in-alt",
       name: "Login",
       link: "/login",
-    }
-    if(email){
+    };
+    if (localStorage.getItem("email") != null) {
       navItems.push(logout);
-      if(navItems.length>6){
+      if (navItems.length > 6) {
         navItems.shift();
       }
-    }
-    else{
+    } else {
       navItems.unshift(login);
-      if(navItems.length>6){
+      if (navItems.length > 6) {
         navItems.pop();
       }
     }
     setNavBar(navItems);
-  },[email]);
+  };
+  const logout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("email");
+    localStorage.removeItem("name");
+    localStorage.removeItem("type");
+    console.log("HEtu");
+    // Push to Home Page
+  };
   return (
     <div className="main-nav-bar" id="main-nav-bar">
-      <div className="bar" id="bar" onClick={()=>{
-        let check = document.getElementById('bar').classList.contains('cross');
-        console.log(check);
-        if(check){
-          document.getElementById('bar').classList.remove('cross');
-          document.getElementById('main-nav-bar').style.left = "-100px";
-        }
-        else{
-          document.getElementById('bar').classList.add('cross');
-          document.getElementById('main-nav-bar').style.left = "0.5vw";
-        }
-      }}>
+      <div
+        className="bar"
+        id="bar"
+        onClick={() => {
+          let check = document
+            .getElementById("bar")
+            .classList.contains("cross");
+          console.log(check);
+          if (check) {
+            document.getElementById("bar").classList.remove("cross");
+            document.getElementById("main-nav-bar").style.left = "-100px";
+          } else {
+            document.getElementById("bar").classList.add("cross");
+            document.getElementById("main-nav-bar").style.left = "0.5vw";
+          }
+        }}
+      >
         <span></span>
         <span></span>
         <span></span>
