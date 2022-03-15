@@ -1,62 +1,97 @@
-import React, { useState } from 'react'
-let doctor_detail = [
-  [
-    {
-      label: "Name",
-      value: "Hetu Patel",
-    },
-    {
-      label: "Age",
-      value: "19",
-    },
-  ],
-  [
-    {
-      label: "Email",
-      value: "hetu200@gmail.com",
-    },
-    {
-      label: "M-Number",
-      value: "9978452565",
-    },
-  ],
-];
-let contact = [
-  [
-    {
-      label: "City",
-      value: "Vadodara",
-    },
-    {
-      label: "Pincode",
-      value: "390025",
-    },
-  ],
-];
-let medical = [
-  [
-    {
-      label: "Degree",
-      value: "MBBS",
-    },
-    {
-      label: "Experience",
-      value: "12 year",
-    },
-  ],
-];
-let adress = "103, vastu flats, ellora park, vastuflats,vadodara,390023";
-function Doctor() {
+import React, { useState,useEffect } from 'react';
+import db from '../../Firebase'
+function Doctor(props) {
+  let address = "103, vastu flats, ellora park, vastuflats,vadodara,390023";
+  let doctor_detail = [
+    [
+      {
+        label: "Name",
+        value: "Hetu Patel",
+      },
+      {
+        label: "Age",
+        value: "19",
+      },
+    ],
+    [
+      {
+        label: "Email",
+        value: "hetu200@gmail.com",
+      },
+      {
+        label: "M-Number",
+        value: "9978452565",
+      },
+    ],
+  ];
+  let contact = [
+    [
+      {
+        label: "City",
+        value: "Vadodara",
+      },
+      {
+        label: "Pincode",
+        value: "390025",
+      },
+    ],
+  ];
+  let medical = [
+    [
+      {
+        label: "Degree",
+        value: "MBBS",
+      },
+      {
+        label: "Experience",
+        value: "12 year",
+      },
+    ],
+  ];
   const [editMode, setMode] = useState(false);
-  const [doctor_Data, setDoctorData] = useState(doctor_detail);
-  const [doctor_Contact, setDoctorContact] = useState(contact);
-  const [doctor_Medical, setDoctorMedical] = useState(medical);
-  const [doctor_Adress,setDoctorAdress] = useState(adress);
+  const [doctor_Data, setDoctorData] = useState([]);
+  const [doctor_Contact, setDoctorContact] = useState([]);
+  const [doctor_Medical, setDoctorMedical] = useState([]);
+  const [doctor_Adress,setDoctorAdress] = useState([]);
+  const [finlData,setFinalData] = useState({});
+  useEffect(()=>{
+    props.setLoad(1);
+    db.collection("doctors").onSnapshot((snap)=>{
+      snap.docs.map((doc)=>{
+        const email = localStorage.getItem("email");
+        if(doc.data().email === email){
+          db.collection("doctors")
+            .doc(doc.id)
+            .onSnapshot((snap) => {
+              props.setLoad(0);
+              setFinalData(snap.data());
+            });
+        }
+      })
+    });
+  },[]);
+  useEffect(()=>{
+    console.log(finlData);
+    doctor_detail[0][0].value = finlData.name;
+    doctor_detail[0][1].value = finlData.age;
+    doctor_detail[1][0].value = localStorage.getItem("email");
+    doctor_detail[1][0].value = finlData.mobile;
+    contact[0][0].value = finlData.city;
+    contact[0][1].value = finlData.pincode;
+    medical[0][0].value = finlData.degree;
+    medical[0][1].value = `${finlData.experience}-years`;
+    address = finlData.address;
+    setDoctorData(doctor_detail);
+    setDoctorAdress(address);
+    setDoctorMedical(medical);
+    setDoctorContact(contact);
+  },[finlData]);
+  const [image, setImage] = useState(localStorage.getItem("image"));
   return (
     <div className="profile-data">
       <div className="left">
           <div className="top">
-              <img src="https://bestprofilepictures.com/wp-content/uploads/2021/04/Cool-Profile-Picture.jpg"/>
+              <img src={image || "https://bestprofilepictures.com/wp-content/uploads/2021/04/Cool-Profile-Picture.jpg"}/>
               <div className="points">
                 <div>
                     <h2>300</h2>

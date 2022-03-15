@@ -6,11 +6,11 @@ import db from "../../Firebase";
 import { Link, useNavigate } from "react-router-dom";
 
 const navItems = [
-  {
-    logo: "fas fa-sign-in-alt",
-    name: "Login",
-    link: "/login",
-  },
+  // {
+  //   logo: "fas fa-sign-in-alt",
+  //   name: "Login",
+  //   link: "/login",
+  // },
   {
     logo: "fas fa-user-circle",
     name: "Profile",
@@ -36,11 +36,11 @@ const navItems = [
     name : "History",
     link : "/history"
   },
-  {
-    logo: "fas fa-sign-out-alt",
-    name: "Sign-Out",
-    link: "/",
-  },
+  // {
+  //   logo: "fas fa-sign-out-alt",
+  //   name: "Sign-Out",
+  //   link: "/",
+  // },
 ];
 function Nav(props) {
   const logout = () => {
@@ -50,7 +50,33 @@ function Nav(props) {
     localStorage.removeItem("type")
     // Push to Home Page
   };
-
+  const [email,setEmail] = useState(localStorage.getItem("email"));
+  const [navBar,setNavBar] = useState([]);
+  useEffect(()=>{
+    const logout = {
+      logo: "fas fa-sign-out-alt",
+      name: "Sign-Out",
+      link: "/",
+    }
+    const login = {
+      logo: "fas fa-sign-in-alt",
+      name: "Login",
+      link: "/login",
+    }
+    if(email){
+      navItems.push(logout);
+      if(navItems.length>6){
+        navItems.shift();
+      }
+    }
+    else{
+      navItems.unshift(login);
+      if(navItems.length>6){
+        navItems.pop();
+      }
+    }
+    setNavBar(navItems);
+  },[email]);
   return (
     <div className="main-nav-bar" id="main-nav-bar">
       <div className="bar" id="bar" onClick={()=>{
@@ -74,7 +100,7 @@ function Nav(props) {
       </div>
       <div className="middle-nav">
         <div className="nav-element">
-          {navItems.map((res) => {
+          {navBar.map((res) => {
             return (
               <Link to={res.link}>
                 {res.name == "Sign-Out" ? (

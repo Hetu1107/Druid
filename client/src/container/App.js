@@ -57,7 +57,7 @@ function App(props) {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/tasks" element={<Task/>} />
-          <Route path="/user" element={<User />} />
+          <Route path="/user" element={<User setLoad={setLoad}/>} />
           <Route
             path="/appointment"
             element={<MainAppointment setLoad={setLoad} />}

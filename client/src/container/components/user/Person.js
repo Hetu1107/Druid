@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import db from "../../Firebase";
 
-function Person() {
+function Person(props) {
   const [editMode, setMode] = useState(false);
   const [user_Data, setUserData] = useState([]);
   const [user_Contact, setUserContact] = useState([]);
@@ -62,9 +62,9 @@ function Person() {
       },
     ],
   ];
-
   const [final, setFinal] = useState([]);
   useEffect(() => {
+    props.setLoad(1)
     db.collection("users").onSnapshot((snap) => {
       snap.docs.map((doc) => {
         const email = localStorage.getItem("email");
@@ -72,6 +72,7 @@ function Person() {
           db.collection("users")
             .doc(doc.id)
             .onSnapshot((snap) => {
+              props.setLoad(0);
               setFinal(snap.data());
             });
         }
