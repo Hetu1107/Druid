@@ -66,4 +66,95 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    .history-main-box{
+        justify-content: center;
+        align-items: center;
+    }
+}
+.main-detail-box{
+    width: 90%;
+    min-height: 40vh;
+    max-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .completed-task{
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        h3{
+            font-size: 25px;
+            font-weight: 400;
+            margin: 0;
+            padding: 0;
+            color: $green;
+            font-family: $Nunito;
+        }
+    }
+    .task-details{
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0;
+        .about-task{
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            justify-content: space-between;
+            h4{
+                font-size: 20px;
+                font-family: $Poppins;
+                margin: 0;
+                font-weight: 600;
+                padding: 0;
+                span{
+                    font-weight: 700;
+                    &.secondary{
+                        color: $primary
+                    }
+                    &.green{
+                        color: $green;
+                    }
+                    &.red{
+                        color: $red;
+                    }
+                }
+            }
+        }
+        .start-task{
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+
+    }
+    .camera-box{
+        position: relative;
+        width: 80%;
+        height: 50vh;
+        padding: 5px 0;
+        margin-top: 10px;
+        .webcam{
+            position: absolute;
+            top: 0;
+            height: 50vh;
+            width: 100%;
+        }
+        .canvas{
+            position: absolute;
+            top: 0;
+            height: 50vh;
+            width: 100%;
+        }
+    }
 }
