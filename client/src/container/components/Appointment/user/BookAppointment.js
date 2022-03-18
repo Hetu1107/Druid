@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import db from "../../../Firebase";
-import firebase from "firebase"
+import firebase from "firebase";
 
 let PaymentDone = 1;
 function BookAppointment(props) {
@@ -19,39 +19,51 @@ function BookAppointment(props) {
   }, []);
 
   const Payment = () => {
-    if (PaymentDone == 1) {
-      props.setPayment(1);
-      // props.setBookedDoc(doctors[selectedDoc]);
-      const docName = doctors[selectedDoc].name;
-      db.collection("users").onSnapshot((snap) => {
-        snap.docs.map((doc) => {
-          if (doc.data().email === email) {
-            db.collection("users").doc(doc.id).collection("appointments").add({
+    // if (PaymentDone == 1) {
+    // props.setPayment(1);
+    // props.setBookedDoc(doctors[selectedDoc]);
+    const docName = doctors[selectedDoc].name;
+    db.collection("users").onSnapshot((snap) => {
+      snap.docs.map((doc) => {
+        if (doc.data().email === email) {
+          db.collection("users")
+            .doc(doc.id)
+            .collection("appointments")
+            .add({
               doctor: docName,
-            });
-          }
-        });
-      });
-
-      db.collection("doctors").onSnapshot((snap) => {
-        snap.docs.map((doc) => {
-          if (doc.data().name === docName) {
-            db.collection("doctors")
-              .doc(doc.id)
-              .collection("appointments")
-              .add({
-                patient: email,
-                name:name,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-              })
-              .then(() => {
-                navigate("/");
+            })
+            .then(() => {
+              db.collection("doctors").onSnapshot((snap) => {
+                snap.docs.map((doc) => {
+                  if (doc.data().name === docName) {
+                    db.collection("doctors")
+                      .doc(doc.id)
+                      .collection("appointments")
+                      .add({
+                        patient: email,
+                        name: name,
+                        timestamp:
+                          firebase.firestore.FieldValue.serverTimestamp(),
+                      })
+                      .then(() => {
+                        navigate("/");
+                      });
+                  }
+                });
               });
-          }
-        });
+            });
+        }
       });
-    }
+    });
+
+    // }
   };
+
+  const submit = () => {
+    window.alert("submitted");
+
+  };
+
   const NullorNot = () => {
     if (selectedDoc == -1) {
       return (
@@ -133,14 +145,4 @@ function BookAppointment(props) {
   );
 }
 
-{
-  /* <div className="item">
-            <div className="left">
-              <h2>Name</h2>
-            </div>
-            <div className="right">
-              <i class="fas fa-angle-right"></i>
-            </div>
-          </div> */
-}
 export default BookAppointment;
