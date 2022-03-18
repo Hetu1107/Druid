@@ -16,12 +16,14 @@ function DoctorAppointment(props) {
         }
       });
     });
-  });
-  const next = () => {};
+  }, []);
+  const next = () => {
+    
+  };
   return (
     <div className="appointment-box doctor">
       <div className="book-appointment">
-        <OnGoingPatient setLoad={props.setLoad}/>
+        <OnGoingPatient setLoad={props.setLoad} />
         <ListOfBooked />
       </div>
       <div className="change-token">
