@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Board from './LeaderBoard/Board'
 import TodayTask from './TodaysTask/TodayTask';
-
+import '../../style/Task.scss';
 function Task() {
   const [selectedState,setSelected] = useState(<Board/>);
   return (
