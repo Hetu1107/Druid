@@ -64,7 +64,6 @@ function BookAppointment(props) {
 
   const submit = () => {
     window.alert("submitted");
-
   };
 
   const NullorNot = () => {
