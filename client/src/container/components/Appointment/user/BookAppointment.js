@@ -5,16 +5,17 @@ import firebase from "firebase";
 
 let PaymentDone = 1;
 function BookAppointment(props) {
+  let setLoad = props.setLoad;
   const [doctors, setDoctors] = useState([]);
   const [selectedDoc, setSelectedDoc] = useState(-1);
   const [email, setEmail] = useState(localStorage.getItem("email"));
   const [name, setName] = useState(localStorage.getItem("name"));
   const navigate = useNavigate();
   useEffect(() => {
-    props.setLoad(1);
+    setLoad(1);
     db.collection("doctors").onSnapshot((snap) => {
       setDoctors(snap.docs.map((doc) => doc.data()));
-      props.setLoad(0);
+      setLoad(0);
     });
   }, []);
 
@@ -22,6 +23,7 @@ function BookAppointment(props) {
     // if (PaymentDone == 1) {
     // props.setPayment(1);
     // props.setBookedDoc(doctors[selectedDoc]);
+    setLoad(1);
     const docName = doctors[selectedDoc].name;
     db.collection("users").onSnapshot((snap) => {
       snap.docs.map((doc) => {
@@ -46,6 +48,7 @@ function BookAppointment(props) {
                           firebase.firestore.FieldValue.serverTimestamp(),
                       })
                       .then(() => {
+                        setLoad(0);
                         navigate("/");
                       });
                   }

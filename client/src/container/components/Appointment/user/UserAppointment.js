@@ -5,7 +5,7 @@ import BookedUser from "./BookedUser";
 function UserAppointment(props) {
   const [payment, setPayment] = useState(0);
   const [BookesDoctor, setBookedDoc] = useState({});
-
+  
   // if 1 means if user has already booked one appointment then
   const checkStatusOfAppointment = () => {
     if (0) {
