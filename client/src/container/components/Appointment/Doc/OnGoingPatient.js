@@ -79,7 +79,7 @@ function OnGoingPatient(props) {
         });
       });
     }
-  });
+  },[]);
   const checkUsers = () => {
     if (!patient.name || !patient.age || !patient.weight) {
       return (

@@ -17,8 +17,39 @@ function DoctorAppointment(props) {
       });
     });
   }, []);
-  const next = () => {
-    
+  const next = async () => {
+    let curr;
+    await new Promise((resolve, rejext) => {
+      db.collection("doctors").onSnapshot((snap) => {
+        snap.docs.map((doc) => {
+          if (doc.data().email === email) {
+            db.collection("doctors")
+              .doc(doc.id)
+              .collection("appointments")
+              .onSnapshot((snap) => {
+                curr = snap.docs[0].id;
+                window.alert(snap.docs[0].id);
+                db.collection("doctors").onSnapshot((snap) => {
+                  snap.docs.map((doc) => {
+                    if (doc.data().email === email) {
+                      db.collection("doctors")
+                        .doc(doc.id)
+                        .collection("appointments")
+                        .doc(curr)
+                        .delete()
+                        .then(() => {
+                          window.alert("Deleted");
+                        });
+                    }
+                  });
+                });
+                resolve(true);
+              });
+          }
+        });
+      });
+      resolve(true);
+    });
   };
   return (
     <div className="appointment-box doctor">

@@ -21,7 +21,7 @@ function ListOfBooked() {
   }, []);
   useEffect(() => {
     console.log(patients);
-  }, [patients]);
+  }, []);
   return (
     <div className="list">
       <div className="top">
