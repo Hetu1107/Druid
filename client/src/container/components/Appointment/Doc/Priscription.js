@@ -3,38 +3,75 @@ import axios from "axios";
 import "../../../style/Priscription.scss";
 import { saveAs } from "file-saver";
 import firebase from "firebase";
-import { storage } from "../../../Firebase";
+import db, { storage } from "../../../Firebase";
 
 function Priscription(props) {
-  const [url,setUrl]=useState("")
-  useEffect(()=>{
-    console.log(url)
-  },[url])
-  const uploadToStorage = (imageURL) =>{
-    const storageRef = firebase.storage().ref('prescription.pdf');
-    getFileBlob(imageURL, blob =>{
-      console.log(blob)
-       storageRef.put(blob).on(
+  const [email, setEmail] = useState(localStorage.getItem("email"));
+  const [patient, setPatient] = useState(props.detail);
+  useEffect(() => {
+    setPatient(props.detail);
+  }, [props.detail, patient]);
+
+  const [url, setUrl] = useState("");
+  useEffect(() => {
+    console.log(url);
+  }, [url]);
+  const uploadToStorage = (imageURL) => {
+    const storageRef = firebase.storage().ref("prescription.pdf");
+    getFileBlob(imageURL, (blob) => {
+      console.log(blob);
+      storageRef.put(blob).on(
         "state_changed",
         (snap) => {
           let percentage = (snap.bytesTransferred / snap.totalBytes) * 100;
           // setProgress(percentage);
         },
         (err) => {
-          console.log(err)
+          console.log(err);
         },
         async () => {
           const url = await storageRef.getDownloadURL();
+          console.log(props.detail);
+          const patient = props.detail.patientEmail;
+          const doct = email;
+          db.collection("users").onSnapshot((snap) => {
+            snap.docs.map((doc) => {
+              if (doc.data().email === patient) {
+                db.collection("users")
+                  .doc(doc.id)
+                  .collection("prescriptions")
+                  .add({
+                    url,
+                    doctor: email,
+                    time: firebase.firestore.FieldValue.serverTimestamp(),
+                  });
+              }
+            });
+          });
+          db.collection("doctors").onSnapshot((snap) => {
+            snap.docs.map((doc) => {
+              if (doc.data().email === doct) {
+                db.collection("doctors")
+                  .doc(doc.id)
+                  .collection("prescription")
+                  .add({
+                    url,
+                    patient: props.detail.patientName,
+                    time: firebase.firestore.FieldValue.serverTimestamp(),
+                  });
+              }
+            });
+          });
           setUrl(url);
         }
       );
-   })
-}
+    });
+  };
   var getFileBlob = function (url, cb) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", url);
     xhr.responseType = "blob";
-    xhr.addEventListener('load', function() {
+    xhr.addEventListener("load", function () {
       cb(xhr.response);
     });
     xhr.send();
@@ -46,7 +83,7 @@ function Priscription(props) {
       });
       // saveAs(newPdf,'newPdf.pdf');
       const fileURL = URL.createObjectURL(newPdf);
-      uploadToStorage(fileURL)
+      uploadToStorage(fileURL);
       const pdfWindow = window.open();
       pdfWindow.location.href = fileURL;
     });
@@ -68,7 +105,7 @@ function Priscription(props) {
             if (input.trim() != "") {
               setPriscription([...priscription, input]);
               setInput("");
-              document.getElementById('input-prescription').value = "";
+              document.getElementById("input-prescription").value = "";
             }
           }}
         >
@@ -126,8 +163,8 @@ function Priscription(props) {
               console.log(detail);
               props.setLoad(1);
               await axios.post("/generate-pdf", detail).then(async () => {
-                  document.getElementById('submit-pdf').style.display = "none";
-                  document.getElementById('show-pdf').style.display = "flex";
+                document.getElementById("submit-pdf").style.display = "none";
+                document.getElementById("show-pdf").style.display = "flex";
               });
               props.setLoad(0);
             }}
