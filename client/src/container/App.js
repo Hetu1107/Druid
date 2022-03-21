@@ -12,6 +12,7 @@ import RegisterMain from "./components/Register/RegisterMain";
 import MainAppointment from "./components/Appointment/MainAppointment";
 import History from "./components/History/History";
 import Task from "./components/Tasks/Task";
+import Admin from "./components/Admin/Admin";
 
 // main function
 function App(props) {
@@ -23,6 +24,29 @@ function App(props) {
       console.log(user);
     }
   });
+  const adminOrNot = () => {
+    if (localStorage.getItem("type") === "admin") {
+      return (
+        <>
+          <Route path="/*" element={<Admin setLoad={setLoad} />} />
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Route path="/login" element={<Login />} />
+          <Route path="/tasks" element={<Task />} />
+          <Route path="/user" element={<User setLoad={setLoad} />} />
+          <Route
+            path="/appointment"
+            element={<MainAppointment setLoad={setLoad} />}
+          />
+          <Route path="/register" element={<RegisterMain />} />
+          <Route path="/history" element={<History />} />
+        </>
+      );
+    }
+  };
   const Loader = () => {
     if (Loadind == 1) {
       return (
@@ -55,15 +79,8 @@ function App(props) {
         {Loader()}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/tasks" element={<Task/>} />
-          <Route path="/user" element={<User setLoad={setLoad}/>} />
-          <Route
-            path="/appointment"
-            element={<MainAppointment setLoad={setLoad} />}
-          />
-          <Route path="/register" element={<RegisterMain />} />
-          <Route path="/history" element={<History/>}/>
+          {adminOrNot()}
+          {/* <Route path="/*" element={<Home/>}/> */}
         </Routes>
       </div>
     </Router>

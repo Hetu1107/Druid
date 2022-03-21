@@ -39,12 +39,21 @@ function Login() {
       });
       if (flag == 0) {
         // Push to registration page
-        navigate("/register");
         localStorage.setItem("type", "patient");
+        navigate("/register");
       } else {
         navigate("/");
         // Push to Home page
       }
+    });
+    db.collection("admin").onSnapshot((snap)=>{
+      snap.docs.map((doc)=>{
+        if(doc.data().email === email){
+          localStorage.setItem("type","admin");
+          localStorage.setItem("taskgiven",doc.data().given);
+          navigate("/admin");
+        }
+      })
     });
     // if(count>0){
     //   console.log(count);
