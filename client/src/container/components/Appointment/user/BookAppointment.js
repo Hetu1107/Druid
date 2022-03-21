@@ -24,17 +24,23 @@ function BookAppointment(props) {
     // props.setPayment(1);
     // props.setBookedDoc(doctors[selectedDoc]);
     setLoad(1);
+    let user_id;
+    let user_appointment_id;
     const docName = doctors[selectedDoc].name;
+    const address = doctors[selectedDoc].address;
     db.collection("users").onSnapshot((snap) => {
       snap.docs.map((doc) => {
         if (doc.data().email === email) {
+          user_id = doc.id;
           db.collection("users")
             .doc(doc.id)
             .collection("appointments")
             .add({
               doctor: docName,
+              address : address
             })
-            .then(() => {
+            .then((ref) => {
+              user_appointment_id = ref.id;
               db.collection("doctors").onSnapshot((snap) => {
                 snap.docs.map((doc) => {
                   if (doc.data().name === docName) {
@@ -46,10 +52,13 @@ function BookAppointment(props) {
                         name: name,
                         timestamp:
                           firebase.firestore.FieldValue.serverTimestamp(),
+                        user_id : user_id,
+                        user_appointment_id : user_appointment_id,
                       })
                       .then(() => {
                         setLoad(0);
-                        navigate("/");
+                        props.setBookedDoc({doctor : docName,address : address});
+                        // navigate("/");
                       });
                   }
                 });

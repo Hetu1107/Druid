@@ -45,6 +45,7 @@ function DoctorAppointment(props) {
   }, []);
   const next = () => {
     let curr = patients[0];
+    console.log(curr);
     setLoad(1);
     if (Id_Booked.length > 0) {
       db.collection("doctors")
@@ -53,36 +54,52 @@ function DoctorAppointment(props) {
         .doc(Id_Booked[0])
         .delete()
         .then(() => {
-          db.collection("users").onSnapshot((snap) => {
-            snap.docs.map((doc) => {
-              if (doc.data().email === curr.patient) {
-                db.collection("users")
-                  .doc(doc.id)
-                  .collection("appointments")
-                  .onSnapshot((snap) => {
-                    db.collection("users")
-                      .doc(doc.id)
-                      .collection("appointments")
-                      .doc(snap.docs[0].id)
-                      .delete()
-                      .then(() => {
-                        setLoad(0);
-                        console.log(doctor);
-                        let a = Id_Booked;
-                        a.splice(0, 1);
-                        setBookedId(a);
-                        let b = patients;
-                        b.splice(0, 1);
-                        setPatients(b);
-                        console.log(Id_Booked);
-                      });
-                  });
-              }
+          db.collection("users")
+            .doc(curr.user_id)
+            .collection("appointments")
+            .doc(curr.user_appointment_id)
+            .delete()
+            .then(() => {
+              setLoad(0);
+              console.log(doctor);
+              let a = Id_Booked;
+              a.splice(0, 1);
+              setBookedId(a);
+              let b = patients;
+              b.splice(0, 1);
+              setPatients(b);
+              console.log(Id_Booked);
             });
-          });
+          // onSnapshot((snap) => {
+          //   snap.docs.map((doc) => {
+          //     if (doc.data().email === curr.patient) {
+          //       db.collection("users")
+          //         .doc(doc.id)
+          //         .collection("appointments")
+          //         .onSnapshot((snap) => {
+          //           db.collection("users")
+          //             .doc(doc.id)
+          //             .collection("appointments")
+          //             .doc(snap.docs[0].id)
+          //             .delete()
+          //             .then(() => {
+          //               setLoad(0);
+          //               console.log(doctor);
+          //               let a = Id_Booked;
+          //               a.splice(0, 1);
+          //               setBookedId(a);
+          //               let b = patients;
+          //               b.splice(0, 1);
+          //               setPatients(b);
+          //               console.log(Id_Booked);
+          //             });
+          //         });
+          //     }
+          //   });
+          // });
         });
     }
-    setLoad(0);
+    // setLoad(0);
     // db.collection("doctors").onSnapshot((snap) => {
     //   snap.docs.map((doc) => {
     //     if (doc.data().email === email) {
