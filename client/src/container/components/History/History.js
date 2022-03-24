@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import DocHistory from "./DocHistory";
 import UserHistory from "./UserHistory";
+import { useNavigate } from "react-router-dom";
 
 // style
 import "../../style/History.scss";
 function History(props) {
+  const navigate = useNavigate();
   const [user, setUser] = useState(localStorage.getItem("user"));
   useEffect(() => {
     if (!user) {
