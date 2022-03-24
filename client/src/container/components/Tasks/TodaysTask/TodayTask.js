@@ -4,17 +4,29 @@ import Webcam from "react-webcam";
 import * as tmPose from "@teachablemachine/pose";
 import * as posenet from "@tensorflow-models/posenet";
 import { drawSkeleton, drawKeypoints } from "./utils";
-function TodayTask() {
+
+
+// firebase 
+import db from '../../../Firebase';
+import firebase from "firebase";
+function TodayTask(props) {
+  const setLoad = props.setLoad;
   const [task,setTask] = useState('Sukhasan');
-  let [completed, setCompleted] = useState(false);
+  let   [completed, setCompleted] = useState(false);
   const [second, setSecond] = useState("00");
   const [minute, setMinute] = useState("00");
   const [isActive, setIsActive] = useState(false);
   const [counter, setCounter] = useState(0);
+  const [id,setId] = useState("");
+  const [score,setScore] = useState(0);
+  const [tasks,setTasks] = useState(0);
   const webCamRef = useRef(null);
   const canvaRef = useRef(null);
   let model, webcam, ctx, labelContainer, maxPredictions;
-  async function init() {
+  async function init(e) {
+    if(e){
+      return;
+    }
     const modelURL =
       "https://teachablemachine.withgoogle.com/models/rMbX7zRAb/model.json";
     const metadataURL =
@@ -84,7 +96,20 @@ function TodayTask() {
       intervalId = setInterval(() => {
         const secondCounter = counter % 60;
         const minuteCounter = Math.floor(counter / 60);
-
+        if(second>="20"){
+          setCompleted(true);
+          setLoad(1);
+          db.collection("users").doc(id).get().then((doc)=>{
+              doc.ref.update({
+                completed : true,
+                score : score + 100,
+                tasks : tasks + 1,
+                task : "Nothing is here..."
+              })
+              setLoad(0);
+          });
+          clearInterval();
+        }
         const computedSecond = String(secondCounter).length === 1 ? `0${secondCounter}`: secondCounter;
         const computedMinute = String(minuteCounter).length === 1 ? `0${minuteCounter}`: minuteCounter;
 
@@ -96,15 +121,32 @@ function TodayTask() {
     }
     return () => clearInterval(intervalId);
   },[isActive, counter]);
-  const startTask = () => {
-    init();
+  const startTask = async () => {
+    setLoad(1);
+    await init(false);
     setIsActive(true);
+    setLoad(0);
   };
   function checkingTaskDetail() {
+    setLoad(1);
+    db.collection("users").onSnapshot((snap)=>{
+      snap.docs.map((doc)=>{
+        if(localStorage.getItem("email")===doc.data().email){
+          setId(doc.id);
+          db.collection("users").doc(id).onSnapshot((snap)=>{
+            setCompleted(snap.data().completed);
+            setScore(snap.data().score);
+            setTasks(snap.data().tasks);
+            setTask(snap.data().task);
+            setLoad(0);
+          })
+        }
+      })
+    });
     if (completed) {
       return (
         <div className="completed-task">
-          <h3>Hey You have finished you daily task</h3>
+          <h3>Hey You have finished your daily task</h3>
         </div>
       );
     } else {

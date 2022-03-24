@@ -76,6 +76,9 @@ function RegisterMain() {
         alergies: user_Health_Detail[0][1].value,
         weight: user_Health_Detail[1][0].value,
         height: user_Health_Detail[1][1].value,
+        score : 0,
+        tasks : 0,
+        task : "nothing is here",
       })
       .then(() => {
         navigate("/");

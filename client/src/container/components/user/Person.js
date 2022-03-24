@@ -5,6 +5,9 @@ function Person(props) {
   const [editMode, setMode] = useState(false);
   const [user_Data, setUserData] = useState([]);
   const [user_Contact, setUserContact] = useState([]);
+  const [score,setScore] = useState(0);
+  const [tasks,setTasks] = useState(0);
+  const [today,setToday] = useState("nothing...");
   const [user_Medical, setUserMedical] = useState([]);
   let user_detail = [
     [
@@ -90,6 +93,9 @@ function Person(props) {
     medical[0][1].value = final.weight;
     medical[1][0].value = final.disease;
     medical[1][1].value = final.alergies;
+    setScore(final.score);
+    setTasks(final.tasks);
+    setToday(final.task);
     setUserData(user_detail);
     setUserMedical(medical);
     setUserContact(contact);
@@ -110,11 +116,11 @@ function Person(props) {
           />
           <div className="points">
             <div>
-              <h2>300</h2>
+              <h2>{score}</h2>
               <h4>Points</h4>
             </div>
             <div>
-              <h2>12</h2>
+              <h2>{tasks}</h2>
               <h4>Tasks</h4>
             </div>
           </div>
@@ -127,7 +133,7 @@ function Person(props) {
           <div className="today-task">
             <h2>Todays Task</h2>
             <div className="t-task">
-              <h4>Yoga Strech</h4>
+              <h4>{today}</h4>
             </div>
           </div>
         </div>

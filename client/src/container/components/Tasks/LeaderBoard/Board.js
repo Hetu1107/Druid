@@ -1,47 +1,60 @@
 import React, { useEffect, useState } from "react";
+import db from "../../../Firebase";
 const score_data = [
   {
     name: "Hetu Patel",
-    tasks : 4,
+    tasks: 4,
     score: 100,
   },
   {
     name: "Hetu Patel",
-    tasks : 5,
+    tasks: 5,
     score: 200,
   },
 ];
 let a = [];
-function Board() {
+function Board(props) {
+  const setLoad = props.setLoad;
+  // loading
+  const [users, setUsers] = useState([]);
   // sorting data with scores
   const sort_data = () => {
-    if(a.length==0){
+    setLoad(1);
+    if (a.length == 0) {
       let i = 0;
-      let n = score_data.length;
+      let n = users.length;
       while (n-- > 0) {
-        if (score_data[i].score > 0) {
-          a.push(score_data[i]);
+        if (users[i].score >= 0) {
+          a.push(users[i]);
         }
         i++;
       }
-      a.sort((x, y) => (x.score > y.score ? 1 : -1));
+      a.sort((x, y) => (x.score < y.score ? 1 : -1));
     }
+    setLoad(0);
   };
   useEffect(() => {
     sort_data();
+  }, [users]);
+
+  useEffect(() => {
+    setLoad(1);
+    db.collection("users").onSnapshot((snap) => {
+      setUsers(snap.docs.map((doc) => doc.data()));
+      setLoad(0);
+    });
   }, []);
-  //   assign value to the data
-  const [sorted, setSorted] = useState(a);
+
   const empty_or_not = () => {
     sort_data();
-    if (sorted.length == 0) {
+    if (users.length == 0) {
       return (
         <div className="empty">
           <h4>Nothing Here...</h4>
         </div>
       );
     } else {
-      return sorted.map((res, index) => {
+      return a.map((res, index) => {
         return (
           <>
             <div className="line"></div>

@@ -35,7 +35,7 @@ function App(props) {
       return (
         <>
           <Route path="/login" element={<Login />} />
-          <Route path="/tasks" element={<Task />} />
+          <Route path="/tasks" element={<Task setLoad={setLoad}/>} />
           <Route path="/user" element={<User setLoad={setLoad} />} />
           <Route
             path="/appointment"
