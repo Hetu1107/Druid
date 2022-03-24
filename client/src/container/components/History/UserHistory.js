@@ -1,5 +1,6 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import db from '../../Firebase';
+import firebase from "firebase";
 const user_his = [
   {
     name: "Hetu Patel",
@@ -22,18 +23,29 @@ const user_his = [
     url: "http://www.africau.edu/images/default/sample.pdf",
   },
 ];
-function UserHistory() {
-
+function UserHistory(props) {
+  const setLoad = props.setLoad;
+  const [history,setHistory] = useState([]);
   // history is empty or not 
+  useEffect(()=>{
+    setLoad(1);
+    db.collection("users").onSnapshot((snap)=>{
+      snap.docs.map((doc)=>{
+        if(doc.data().email===localStorage.getItem("email")){
+          db.collection("users").doc(doc.id).collection("")
+        }
+      })
+    })
+  },[])
   const empty_or_not = () => {
-    if (user_his.length == 0) {
+    if (history.length == 0) {
       return (
         <div className="empty">
           <h4>Nothing Here...</h4>
         </div>
       );
     } else {
-      return user_his.map((res, index) => {
+      return history.map((res, index) => {
         return (
           <>
             <div className="line"></div>
@@ -71,7 +83,7 @@ function UserHistory() {
 
   // all the pdf box 
   const pdf_call = (e) => {
-    return user_his.map((res, index) => {
+    return history.map((res, index) => {
       return (
         <div className="object-area" id={`object-area-${index}`}>
           <i

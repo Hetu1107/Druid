@@ -4,13 +4,13 @@ import UserHistory from './UserHistory'
 
 // style 
 import '../../style/History.scss'
-function History() {
+function History(props) {
     const check = () =>{
-        if(0){
-           return <DocHistory/>
+        if(localStorage.getItem("type")==="doctor"){
+           return <DocHistory setLoad={props.setLoad}/>
         }
         else{
-           return <UserHistory/>
+           return <UserHistory setLoad={props.setLoad}/>
         }
     }
   return (

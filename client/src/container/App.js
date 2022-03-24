@@ -42,7 +42,7 @@ function App(props) {
             element={<MainAppointment setLoad={setLoad} />}
           />
           <Route path="/register" element={<RegisterMain />} />
-          <Route path="/history" element={<History />} />
+          <Route path="/history" element={<History setLoad={setLoad}/>} />
         </>
       );
     }
