@@ -24,77 +24,7 @@ function OnGoingPatient(props) {
       });
     });
   }, [patient]);
-  // useEffect(() => {
-  //   db.collection("doctors").onSnapshot((snap) => {
-  //     snap.docs.map((doc) => {
-  //       if (doc.data().email === email) {
-  //         db.collection("doctors")
-  //           .doc(doc.id)
-  //           .collection("appointments")
-  //           .orderBy("timestamp", "asc")
-  //           .onSnapshot((snap) => {
-  //             setAll(snap.docs.map((doc) => doc.data()));
-  //             if (snap.docs.length) {
-  //               db.collection("doctors")
-  //                 .doc(doc.id)
-  //                 .update({ current: snap.docs[0].data()?.patient || "" });
-  //             } else {
-  //               db.collection("doctors").doc(doc.id).update({ current: "" });
-  //               setPatient([]);
-  //             }
-  //           });
-  //       }
-  //     });
-  //   });
-  // },[]);
-
-  // useEffect(() => {
-  //   // console.log(allPatient)
-  // }, [allPatient]);
-
-  // useEffect(() => {
-  //   db.collection("doctors").onSnapshot((snap) => {
-  //     snap.docs.map((doc) => {
-  //       if (doc.data().email === email) {
-  //         let patientEmail = doc.data().current;
-  //         if (patientEmail == "") {
-  //           setPatient([]);
-  //         }
-  //         db.collection("users").onSnapshot((snap) => {
-  //           snap.docs.map((doc) => {
-  //             if (doc.data().email === patientEmail) {
-  //               setPatient(doc.data());
-  //               // console.log(patient)
-  //             }
-  //           });
-  //         });
-  //       }
-  //     });
-  //   });
-  // }, [allPatient]);
-
-  // useEffect(() => {
-  //   if (allPatient.length) {
-  //     db.collection("doctors").onSnapshot((snap) => {
-  //       snap.docs.map((doc) => {
-  //         if (doc.data().email === email) {
-  //           db.collection("doctors")
-  //             .doc(doc.id)
-  //             .update({ current: allPatient[0].patient });
-  //         }
-  //       });
-  //     });
-  //     // setPatient()
-  //   } else {
-  //     db.collection("doctors").onSnapshot((snap) => {
-  //       snap.docs.map((doc) => {
-  //         if (doc.data().email === email) {
-  //           // db.collection("doctors").doc(doc.id).update({ current: "" });
-  //         }
-  //       });
-  //     });
-  //   }
-  // },[]);
+  
   const checkUsers = () => {
     if (patient == 0) {
       return (
@@ -156,7 +86,8 @@ function OnGoingPatient(props) {
           <Priscription
             detail={{
               docname: "Doctor Name",
-              patientName: patient.name,
+              patientName:patient.name,
+              patientEmail: patient.patient,
               mobile: 99783431459,
               age: patient.age,
               precription: [],
