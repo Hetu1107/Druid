@@ -1,25 +1,24 @@
-import React from 'react'
-import DocHistory from './DocHistory'
-import UserHistory from './UserHistory'
+import React, { useEffect, useState } from "react";
+import DocHistory from "./DocHistory";
+import UserHistory from "./UserHistory";
 
-// style 
-import '../../style/History.scss'
+// style
+import "../../style/History.scss";
 function History(props) {
-    const check = () =>{
-        if(localStorage.getItem("type")==="doctor"){
-           return <DocHistory setLoad={props.setLoad}/>
-        }
-        else{
-           return <UserHistory setLoad={props.setLoad}/>
-        }
+  const [user, setUser] = useState(localStorage.getItem("user"));
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
     }
-  return (
-    <>
-        {
-            check()
-        }
-    </>
-  )
+  }, [user]);
+  const check = () => {
+    if (localStorage.getItem("type") === "doctor") {
+      return <DocHistory setLoad={props.setLoad} />;
+    } else {
+      return <UserHistory setLoad={props.setLoad} />;
+    }
+  };
+  return <>{check()}</>;
 }
 
-export default History
+export default History;

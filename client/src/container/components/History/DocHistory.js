@@ -1,37 +1,37 @@
-import React from 'react'
-const doc_his = [
-  {
-    name: "Hetu Patel",
-    date: "10-10-10",
-    url: "http://www.africau.edu/images/default/sample.pdf",
-  },
-  {
-    name: "Naitik Patil",
-    date: "11-10-10",
-    url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-  },
-  {
-    name: "Zaid Bhimala",
-    date: "12-10-10",
-    url: "http://www.africau.edu/images/default/sample.pdf",
-  },
-  {
-    name: "Roop Lala",
-    date: "13-10-10",
-    url: "http://www.africau.edu/images/default/sample.pdf",
-  },
-];
-function DocHistory() {
-  // history is empty or not 
+import React, { useState, useEffect } from "react";
+import db from "../../Firebase";
+function DocHistory(props) {
+  const setLoad = props.setLoad;
+  const [history, setHistory] = useState([]);
+  // history is empty or not
+  useEffect(() => {
+    setLoad(1);
+    db.collection("doctors").onSnapshot((snap) => {
+      snap.docs.map((doc) => {
+        if (doc.data().email === localStorage.getItem("email")) {
+          db.collection("doctors")
+            .doc(doc.id)
+            .collection("prescription")
+            .onSnapshot((snap) => {
+              let a = history;
+              snap.docs.map((doc) => a.push(doc.data()));
+              setHistory(a);
+              setLoad(0);
+            });
+          console.log(doc.data());
+        }
+      });
+    });
+  }, []);
   const empty_or_not = () => {
-    if (doc_his.length == 0) {
+    if (history.length == 0) {
       return (
         <div className="empty">
           <h4>Nothing Here...</h4>
         </div>
       );
     } else {
-      return doc_his.map((res, index) => {
+      return history.map((res, index) => {
         return (
           <>
             <div className="line"></div>
@@ -40,10 +40,10 @@ function DocHistory() {
                 <h4>{index + 1}</h4>
               </div>
               <div className="col 2">
-                <h4>{res.name}</h4>
+                <h4>{res.patient}</h4>
               </div>
               <div className="col 3">
-                <h4>{res.date}</h4>
+                <h4>{res.time}</h4>
               </div>
               <div className="col 4">
                 <h4
@@ -67,9 +67,9 @@ function DocHistory() {
     }
   };
 
-  // all the pdf box 
+  // all the pdf box
   const pdf_call = (e) => {
-    return doc_his.map((res, index) => {
+    return history.map((res, index) => {
       return (
         <div className="object-area" id={`object-area-${index}`}>
           <i
@@ -97,7 +97,7 @@ function DocHistory() {
             <h4>No.</h4>
           </div>
           <div className="col 2">
-            <h4>Doctor Name</h4>
+            <h4>Patient Name</h4>
           </div>
           <div className="col 3">
             <h4>Date</h4>
@@ -109,7 +109,7 @@ function DocHistory() {
         {empty_or_not()}
       </div>
     </div>
-  )
+  );
 }
 
-export default DocHistory
+export default DocHistory;

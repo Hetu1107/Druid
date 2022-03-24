@@ -31,7 +31,6 @@ function DoctorAppointment(props) {
         }
       });
     });
-    console.log(Id_Booked);
   }, []);
 
   useEffect(() => {
@@ -61,73 +60,17 @@ function DoctorAppointment(props) {
             .delete()
             .then(() => {
               setLoad(0);
-              console.log(doctor);
+              // console.log(doctor);
               let a = Id_Booked;
               a.splice(0, 1);
               setBookedId(a);
               let b = patients;
               b.splice(0, 1);
               setPatients(b);
-              console.log(Id_Booked);
+              // console.log(Id_Booked);
             });
-          // onSnapshot((snap) => {
-          //   snap.docs.map((doc) => {
-          //     if (doc.data().email === curr.patient) {
-          //       db.collection("users")
-          //         .doc(doc.id)
-          //         .collection("appointments")
-          //         .onSnapshot((snap) => {
-          //           db.collection("users")
-          //             .doc(doc.id)
-          //             .collection("appointments")
-          //             .doc(snap.docs[0].id)
-          //             .delete()
-          //             .then(() => {
-          //               setLoad(0);
-          //               console.log(doctor);
-          //               let a = Id_Booked;
-          //               a.splice(0, 1);
-          //               setBookedId(a);
-          //               let b = patients;
-          //               b.splice(0, 1);
-          //               setPatients(b);
-          //               console.log(Id_Booked);
-          //             });
-          //         });
-          //     }
-          //   });
-          // });
         });
     }
-    // setLoad(0);
-    // db.collection("doctors").onSnapshot((snap) => {
-    //   snap.docs.map((doc) => {
-    //     if (doc.data().email === email) {
-    //       db.collection("doctors")
-    //         .doc(doc.id)
-    //         .collection("appointments")
-    //         .onSnapshot((snap) => {
-    //           curr = snap.docs[0].id;
-    //           // window.alert(snap.docs[0].id);
-    //           db.collection("doctors").onSnapshot((snap) => {
-    //             snap.docs.map((doc) => {
-    //               if (doc.data().email === email) {
-    //                 db.collection("doctors")
-    //                   .doc(doc.id)
-    //                   .collection("appointments")
-    //                   .doc(curr)
-    //                   .delete()
-    //                   .then(() => {
-    //                     window.alert("Deleted");
-    //                   });
-    //               }
-    //             });
-    //           });
-    //           //
-    //         });
-    //     }
-    //   });
-    // });
   };
   return (
     <div className="appointment-box doctor">

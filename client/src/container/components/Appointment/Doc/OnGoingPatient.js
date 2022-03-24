@@ -10,8 +10,9 @@ function OnGoingPatient(props) {
   const [allPatient, setAll] = useState([]);
   const [current, setCurrent] = useState([]);
   useEffect(() => {
+    // console.log(props)
     setPatient(props.patient);
-    console.log(patient);
+    // console.log(patient);
   }, [props.patient, patient]);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ function OnGoingPatient(props) {
       });
     });
   }, [patient]);
-  
+
   const checkUsers = () => {
     if (patient == 0) {
       return (
@@ -85,10 +86,10 @@ function OnGoingPatient(props) {
         <div className="deatil-of-doc">
           <Priscription
             detail={{
-              docname: "Doctor Name",
-              patientName:patient.name,
+              docname: localStorage.getItem("name"),
+              patientName: patient.name,
               patientEmail: patient.patient,
-              mobile: 99783431459,
+              mobile: patient.number,
               age: patient.age,
               precription: [],
             }}

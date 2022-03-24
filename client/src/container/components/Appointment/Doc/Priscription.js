@@ -10,6 +10,7 @@ function Priscription(props) {
   const [patient, setPatient] = useState(props.detail);
   useEffect(() => {
     setPatient(props.detail);
+    // console.log(patient);
   }, [props.detail, patient]);
 
   const [url, setUrl] = useState("");
@@ -34,16 +35,21 @@ function Priscription(props) {
           console.log(props.detail);
           const patient = props.detail.patientEmail;
           const doct = email;
+          let today = new Date();
+          let day = today.getDate();
+          let month = today.getMonth() + 1;
+          let year = today.getFullYear();
+          let date = day + "-" + month + "-" + year;
           db.collection("users").onSnapshot((snap) => {
             snap.docs.map((doc) => {
-              if (doc.data().email === patient) {
+              if (doc.data().mobile === patient.patientEmail) {
                 db.collection("users")
                   .doc(doc.id)
                   .collection("prescriptions")
                   .add({
                     url,
-                    doctor: email,
-                    time: firebase.firestore.FieldValue.serverTimestamp(),
+                    doctor: localStorage.getItem("name"),
+                    time: date,
                   });
               }
             });
@@ -57,7 +63,7 @@ function Priscription(props) {
                   .add({
                     url,
                     patient: props.detail.patientName,
-                    time: firebase.firestore.FieldValue.serverTimestamp(),
+                    time: date,
                   });
               }
             });

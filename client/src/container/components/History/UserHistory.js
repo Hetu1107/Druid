@@ -1,42 +1,28 @@
 import React, { useEffect, useState } from "react";
-import db from '../../Firebase';
+import db from "../../Firebase";
 import firebase from "firebase";
-const user_his = [
-  {
-    name: "Hetu Patel",
-    date: "10-10-10",
-    url: "http://www.africau.edu/images/default/sample.pdf",
-  },
-  {
-    name: "Naitik Patil",
-    date: "11-10-10",
-    url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-  },
-  {
-    name: "Zaid Bhimala",
-    date: "12-10-10",
-    url: "http://www.africau.edu/images/default/sample.pdf",
-  },
-  {
-    name: "Roop Lala",
-    date: "13-10-10",
-    url: "http://www.africau.edu/images/default/sample.pdf",
-  },
-];
 function UserHistory(props) {
   const setLoad = props.setLoad;
-  const [history,setHistory] = useState([]);
-  // history is empty or not 
-  useEffect(()=>{
+  const [history, setHistory] = useState([]);
+  // history is empty or not
+  useEffect(() => {
     setLoad(1);
-    db.collection("users").onSnapshot((snap)=>{
-      snap.docs.map((doc)=>{
-        if(doc.data().email===localStorage.getItem("email")){
-          db.collection("users").doc(doc.id).collection("")
+    db.collection("users").onSnapshot((snap) => {
+      snap.docs.map((doc) => {
+        if (doc.data().email === localStorage.getItem("email")) {
+          db.collection("users")
+            .doc(doc.id)
+            .collection("prescriptions")
+            .onSnapshot((snap) => {
+              let a = history;
+              snap.docs.map((doc) => a.push(doc.data()));
+              setHistory(a);
+              setLoad(0);
+            });
         }
-      })
-    })
-  },[])
+      });
+    });
+  }, []);
   const empty_or_not = () => {
     if (history.length == 0) {
       return (
@@ -54,10 +40,10 @@ function UserHistory(props) {
                 <h4>{index + 1}</h4>
               </div>
               <div className="col 2">
-                <h4>{res.name}</h4>
+                <h4>{res.doctor}</h4>
               </div>
               <div className="col 3">
-                <h4>{res.date}</h4>
+                <h4>{res.time}</h4>
               </div>
               <div className="col 4">
                 <h4
@@ -81,7 +67,7 @@ function UserHistory(props) {
     }
   };
 
-  // all the pdf box 
+  // all the pdf box
   const pdf_call = (e) => {
     return history.map((res, index) => {
       return (
