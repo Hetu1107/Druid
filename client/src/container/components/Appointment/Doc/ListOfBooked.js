@@ -5,6 +5,7 @@ function ListOfBooked(props) {
   const [patients, setPatients] = useState(props.patients);
   useEffect(() => {
     setPatients(props.patients);
+    console.log(patients)
   }, [props.patients]);
   return (
     <div className="list">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../style/Nav.scss";
-import src from "../../images/Healer.png";
+import src from "../../images/Healer.svg";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import db from "../../Firebase";
 import { Link, useNavigate } from "react-router-dom";
