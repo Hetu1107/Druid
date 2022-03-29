@@ -7,21 +7,24 @@ function UserHistory(props) {
   // history is empty or not
   useEffect(() => {
     setLoad(1);
-    db.collection("users").onSnapshot((snap) => {
-      snap.docs.map((doc) => {
-        if (doc.data().email === localStorage.getItem("email")) {
-          db.collection("users")
-            .doc(doc.id)
-            .collection("prescriptions")
-            .onSnapshot((snap) => {
-              let a = history;
-              snap.docs.map((doc) => a.push(doc.data()));
-              setHistory(a);
-              setLoad(0);
-            });
-        }
+    if(history.length==0){
+
+      db.collection("users").onSnapshot((snap) => {
+        snap.docs.map((doc) => {
+          if (doc.data().email === localStorage.getItem("email")) {
+            db.collection("users")
+              .doc(doc.id)
+              .collection("prescriptions")
+              .onSnapshot((snap) => {
+                let a = history;
+                snap.docs.map((doc) => a.push(doc.data()));
+                setHistory(a);
+                setLoad(0);
+              });
+          }
+        });
       });
-    });
+    }
   }, []);
   const empty_or_not = () => {
     if (history.length == 0) {
