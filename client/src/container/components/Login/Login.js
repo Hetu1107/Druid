@@ -7,6 +7,10 @@ import login from "../../images/lottie/login.json";
 import yoga from "../../images/lottie/Yoga2.json";
 import { useNavigate } from "react-router-dom";
 
+// import { auth, provider} from "../../Firebase"; 
+
+
+
 function Login() {
   const navigate = useNavigate();
 
@@ -70,9 +74,9 @@ function Login() {
   };
 
   const responseGoogle = async (response) => {
-    const profile = response.profileObj;
-    const token = response.tokenId;
-    console.log(profile);
+    const profile = await response.profileObj;
+    const token = await response.tokenId;
+    console.log(response);
     localStorage.setItem("user", token);
     localStorage.setItem("email", profile.email);
     localStorage.setItem("image", profile.imageUrl);
@@ -100,7 +104,7 @@ function Login() {
           ></Player>
           <div className="google">
             <GoogleLogin
-              clientId="228410119116-q73i0va2bdvg2qnabb6msrm7d8tml87d.apps.googleusercontent.com"
+              clientId="678856842896-l32g0blo9ig6svifljhjjbg7kqtlmmhv.apps.googleusercontent.com"
               buttonText="Login"
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
